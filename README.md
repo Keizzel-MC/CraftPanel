@@ -346,18 +346,6 @@ No incluyas contraseñas, datos de usuarios, tokens, direcciones privadas ni arc
 
 Describe qué problema resolvería la función, cómo podría funcionar y si afectaría a la versión Web, Desktop o ambas.
 
-### Enviar cambios
-
-Si el repositorio acepta contribuciones, puedes:
-
-1. Crear un *fork* del repositorio.
-2. Crear una rama para tus cambios.
-3. Implementar y probar la mejora.
-4. Describir los cambios realizados.
-5. Abrir un *pull request*.
-
-Procura mantener los cambios claros y documentados.
-
 ---
 
 ## 📄 Licencia
