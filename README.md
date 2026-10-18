@@ -58,7 +58,7 @@ La versión Desktop está orientada a Windows y busca ofrecer una experiencia de
 
 ### 🧠 Configuración de memoria RAM
 
-La versión Desktop trabajada incluye un selector de memoria RAM por servidor, con un rango configurado de **1 a 32 GB**. La cantidad apropiada depende de la versión de Minecraft, los mods, los plugins, el número de jugadores y los recursos del equipo.
+La versión Desktop trabajada incluye un selector de memoria RAM por servidor, con un rango configurado de **1 a 16 GB**. La cantidad apropiada depende de la versión de Minecraft, los mods, los plugins, el número de jugadores y los recursos del equipo.
 
 No asignes más memoria de la que tu equipo pueda proporcionar. Deja recursos suficientes para Windows y las demás aplicaciones.
 
