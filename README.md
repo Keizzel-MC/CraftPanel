@@ -1,311 +1,192 @@
 # CraftPanel
 
-**Administra tus servidores de Minecraft desde un solo lugar.**
+Administra tus servidores de Minecraft desde un solo lugar.
+CraftPanel es una herramienta pensada para hacer más sencilla la administración de servidores de Minecraft, con versiones Web y Desktop. El proyecto está dirigido a jugadores, administradores de servidores y personas que quieran experimentar, aprender o crear su propio entorno de juego.
+CraftPanel: tu servidor, tu configuración, tu control.
 
-CraftPanel es una herramienta de gestión diseñada para facilitar la administración de servidores de Minecraft mediante una interfaz sencilla, con versiones Web y Desktop orientadas a distintos tipos de usuarios.
+CraftPanel se publica como un proyecto abierto bajo la licencia MIT. Puedes estudiar el código, modificarlo, adaptarlo a tus necesidades y compartir tus propias versiones, siempre respetando las condiciones de la licencia.
+📚 Contenido
+- ¿Qué es CraftPanel?
+- Funciones principales
+- Versiones disponibles
+- Requisitos
+- Instalación
+- Primeros pasos
+- Configuración y administración
+- Seguridad y privacidad
+- Solución de problemas
+- Participa en CraftPanel
+- Licencia
+- Aviso sobre Minecraft
+🎮 ¿Qué es CraftPanel?
+CraftPanel busca ofrecer una forma más accesible de organizar y administrar servidores de Minecraft. En vez de tener que recordar cada comando o gestionar todas las tareas manualmente, la aplicación reúne opciones de administración en una interfaz propia.
+El proyecto contempla dos versiones:
+- CraftPanel Web: una interfaz que se ejecuta localmente y se utiliza desde un navegador.
+- CraftPanel Desktop: una aplicación para Windows enfocada en la administración desde el escritorio.
+CraftPanel está pensado para distintos tipos de usuarios: quienes quieren jugar con amigos en un servidor propio, quienes están aprendiendo a administrar servidores y quienes desean explorar el código para adaptarlo o contribuir al proyecto.
+Las funciones exactas pueden variar de una versión a otra. Consulta las instrucciones incluidas con la versión que descargues.
+✨ Funciones principales
+🗂️ Administración de servidores
+CraftPanel está diseñado para facilitar la organización y gestión de servidores de Minecraft desde una interfaz central. Comprueba siempre qué servidor y qué directorio tienes seleccionados antes de efectuar cambios.
+🌐 CraftPanel Web
+La versión Web permite utilizar la interfaz desde un navegador mientras el proceso de CraftPanel está en ejecución. El paquete Web utiliza Node.js y npm para instalar sus dependencias e iniciar la aplicación.
+Ejecutarse en un navegador no significa que CraftPanel esté preparado automáticamente para publicarse en Internet. Revisa la configuración de red y la seguridad antes de permitir conexiones externas.
 
-> Tu servidor. Tu configuración. Tu control.
+🖥️ CraftPanel Desktop
+La versión Desktop está orientada a Windows y busca ofrecer una experiencia de administración desde el escritorio.
+🧠 Configuración de memoria RAM
+La versión Desktop trabajada incluye un selector de memoria RAM por servidor, con un rango configurado de 1 a 32 GB. La cantidad apropiada depende de la versión de Minecraft, los mods, los plugins, el número de jugadores y los recursos del equipo.
+No asignes más memoria de la que tu equipo pueda proporcionar. Deja recursos suficientes para Windows y las demás aplicaciones.
+☕ Selección de Java
+La versión Desktop contempla la selección de una ruta de Java para el servidor. La versión necesaria de Java depende del tipo y la versión del servidor de Minecraft que utilices.
+👤 Usuarios e instalación inicial
+Las versiones pueden incluir funciones de registro y gestión de usuarios. Si distribuyes o instalas CraftPanel en otro equipo, asegúrate de usar un paquete limpio que no contenga cuentas ni datos de tu propia instalación.
+📦 Versiones disponibles
+Versión	Descripción
+Web	Interfaz utilizada desde el navegador y diseñada para ejecutarse localmente.
+Desktop	Aplicación para Windows, con opciones de configuración de servidor como memoria RAM y ruta de Java.
 
----
 
-## 📌 Tabla de contenido
-
-- [Acerca del proyecto](#-acerca-del-proyecto)
-- [Características](#-características)
-- [Versiones disponibles](#-versiones-disponibles)
-- [Requisitos](#-requisitos)
-- [Instalación](#-instalación)
-- [Configuración](#-configuración)
-- [Gestión de servidores](#-gestión-de-servidores)
-- [Seguridad](#-seguridad)
-- [Solución de problemas](#-solución-de-problemas)
-- [Hoja de ruta](#-hoja-de-ruta)
-- [Contribuciones](#-contribuciones)
-- [Licencia](#-licencia)
-- [Aviso legal](#-aviso-legal)
-
----
-
-## 🎮 Acerca del proyecto
-
-**CraftPanel** nace con la idea de simplificar la administración de servidores de Minecraft. Su objetivo es ofrecer una experiencia más cómoda para organizar, configurar y gestionar servidores sin depender exclusivamente de comandos manuales.
-
-El proyecto contempla dos versiones principales:
-
-- **CraftPanel Web:** una interfaz que se ejecuta localmente y se utiliza desde un navegador.
-- **CraftPanel Desktop:** una aplicación para Windows diseñada para administrar desde el escritorio.
-
-CraftPanel está pensado tanto para jugadores que desean crear servidores privados para sus amigos como para usuarios interesados en experimentar con distintas configuraciones y aprender sobre la administración de servidores.
-
-El proyecto continúa evolucionando. Las funciones y los requisitos específicos pueden variar según la versión publicada.
-
-## ✨ Características
-
-### 🖥️ Interfaz de administración
-
-CraftPanel busca centralizar las tareas de gestión de servidores en una interfaz accesible, organizada y fácil de utilizar.
-
-### 🌐 Versión Web
-
-La versión Web permite acceder a la interfaz desde un navegador mientras la aplicación está ejecutándose localmente.
-
-Está pensada para ofrecer una alternativa cómoda a la administración tradicional mediante terminales y archivos de configuración.
-
-### 💻 Versión Desktop
-
-La versión Desktop está orientada a usuarios de Windows que prefieren gestionar sus servidores desde una aplicación de escritorio.
-
-Su distribución puede incluir archivos de inicio e instalación, dependiendo de la versión.
-
-### ⚙️ Configuración por servidor
-
-CraftPanel contempla opciones de configuración para administrar los servidores de forma individual. La disponibilidad de cada opción depende de la versión instalada.
-
-### 🧠 Administración de memoria RAM
-
-La versión Desktop trabajada contempla una opción para configurar la memoria RAM asignada a cada servidor, dentro del rango admitido por la aplicación.
-
-La memoria recomendada depende de la versión de Minecraft, los mods, los plugins, la cantidad de jugadores y los recursos del equipo.
-
-### ☕ Selección de Java
-
-La versión Desktop contempla la posibilidad de seleccionar la ruta de Java que utilizará el servidor.
-
-Esto resulta útil cuando distintas versiones de Minecraft necesitan diferentes versiones de Java.
-
-### 🗂️ Administración de archivos
-
-CraftPanel está orientado a facilitar la gestión de los directorios relacionados con los servidores. Algunas operaciones pueden afectar directamente a los archivos almacenados en el equipo.
-
-**Importante:** antes de eliminar un servidor o sus archivos, realiza una copia de seguridad de los mundos, configuraciones y complementos que quieras conservar.
-
-### 👤 Sistema de usuarios
-
-Las versiones pueden incluir funciones de registro y administración de usuarios.
-
-Cada instalación distribuida debe utilizar sus propios datos de usuario. Nunca compartas una copia que contenga tus cuentas, credenciales o información privada.
-
----
-
-## 📦 Versiones disponibles
-
-| Versión | Descripción |
-|---|---|
-| CraftPanel Web | Interfaz accesible desde un navegador, diseñada para ejecutarse localmente. |
-| CraftPanel Desktop | Aplicación para Windows enfocada en la administración desde el escritorio. |
-
-Las versiones pueden tener requisitos y funciones diferentes. Consulta las instrucciones incluidas en cada distribución antes de instalarla o actualizarla.
-
-## 🛠️ Requisitos
-
-### CraftPanel Web
-
-- Windows u otro sistema compatible con la versión de Node.js utilizada.
-- Node.js instalado.
-- npm disponible en la terminal.
+Cuando haya paquetes listos para descargar, publícalos en la sección Releases de GitHub. Revisa las notas de cada versión para conocer cambios, requisitos y posibles limitaciones.
+🛠️ Requisitos
+CraftPanel Web
+- Una versión compatible de Node.js.
+- npm, normalmente incluido con Node.js.
 - Un navegador moderno.
 - Los archivos de CraftPanel Web.
-- Java y los archivos del servidor de Minecraft, cuando sean necesarios para ejecutar el servidor.
-
-### CraftPanel Desktop
-
-- Windows compatible con la versión distribuida.
-- Los archivos de CraftPanel Desktop o su instalador.
-- Java compatible con la versión de Minecraft que quieras ejecutar.
-- Espacio suficiente en disco para la aplicación, los servidores y sus mundos.
-
-Los requisitos definitivos dependen de la versión que descargues.
-
----
-
-## 🚀 Instalación
-
-### CraftPanel Web
-
-1. Descarga el paquete Web desde la sección **Releases** del repositorio, si está disponible.
+- Java y los archivos del servidor de Minecraft que quieras ejecutar, según tu configuración.
+CraftPanel Desktop
+- Una versión compatible de Windows.
+- Los archivos de la distribución o el instalador oficial de CraftPanel.
+- Una versión de Java compatible con el servidor de Minecraft que vayas a utilizar.
+- Espacio suficiente para la aplicación, los servidores, los mundos y sus copias de seguridad.
+Los requisitos pueden cambiar con futuras versiones.
+🚀 Instalación
+Instalar CraftPanel Web
+1. Descarga el paquete de CraftPanel Web desde Releases, si hay una versión publicada.
 2. Extrae el archivo ZIP en una carpeta de tu elección.
-3. Instala Node.js si todavía no está instalado.
-4. Abre una terminal dentro de la carpeta que contiene `package.json`.
+3. Instala Node.js si todavía no lo tienes.
+4. Abre una terminal en la carpeta que contiene package.json.
 5. Instala las dependencias:
-
-   ```bash
    npm install
-   ```
-
 6. Inicia CraftPanel:
-
-   ```bash
    npm start
-   ```
-
-7. Revisa el mensaje de inicio en la terminal para identificar la dirección local configurada.
-8. Abre esa dirección en tu navegador.
-
-Para detener la aplicación, vuelve a la terminal y presiona `Ctrl + C`.
-
-**Nota:** la dirección y el puerto dependen de la configuración de la versión instalada. Utiliza los valores que indique la aplicación.
-
-### CraftPanel Desktop
-
-1. Descarga la versión Desktop publicada en el repositorio.
-2. Extrae el ZIP si no incluye un instalador.
+7. Revisa el mensaje que aparece en la terminal para saber qué dirección local debes abrir.
+8. Abre esa dirección en el navegador.
+Para detener la aplicación, vuelve a la terminal en la que se está ejecutando y pulsa Ctrl + C.
+Nota: la dirección y el puerto pueden depender de la configuración de la versión descargada. Sigue el mensaje de inicio y las instrucciones de ese paquete.
+Instalar CraftPanel Desktop
+1. Descarga la versión Desktop desde la sección Releases, si está disponible.
+2. Extrae el ZIP o ejecuta el instalador, según el formato distribuido.
 3. Lee las instrucciones incluidas en el paquete.
-4. Ejecuta el instalador, si corresponde.
-5. Abre CraftPanel desde el acceso directo o archivo de inicio suministrado.
-6. Configura las rutas y opciones que necesites.
-
-Descarga ejecutables únicamente desde fuentes confiables.
-
----
-
-## ⚙️ Configuración
-
-CraftPanel puede utilizar archivos de configuración propios, dependiendo de la versión distribuida.
-
-Antes de modificar cualquier archivo:
-
-1. Haz una copia de seguridad.
-2. Comprueba que estás editando el archivo correcto.
-3. Verifica que las rutas correspondan a tu equipo.
-4. Evita modificar opciones cuyo propósito desconozcas.
-5. Reinicia la aplicación cuando sea necesario para aplicar los cambios.
-
-### Rutas de servidores
-
-Las rutas deben apuntar a las carpetas correctas de tu equipo.
-
-No copies configuraciones que dependan del nombre de usuario de Windows o de directorios personales de otra persona.
-
-### Memoria RAM
-
-Asigna una cantidad de memoria apropiada para el servidor. Deja suficientes recursos para Windows, CraftPanel y los demás programas que estén ejecutándose.
-
-### Java
-
-Comprueba que la versión de Java sea compatible con la versión de Minecraft que utilizarás.
-
-Puedes consultar la versión instalada desde una terminal mediante:
-
-```bash
+4. Abre CraftPanel desde el archivo de inicio o el acceso directo suministrado.
+5. Configura las rutas y las opciones que necesites.
+Descarga ejecutables únicamente de fuentes confiables. Si Windows muestra una advertencia de seguridad, verifica el origen del archivo antes de continuar.
+🧭 Primeros pasos
+Después de instalar CraftPanel:
+1. Abre la aplicación. Sigue las instrucciones específicas de la versión Web o Desktop.
+2. Comprueba la configuración inicial. Revisa los directorios y las opciones disponibles.
+3. Configura tu servidor. Verifica su ruta, los archivos necesarios y la versión de Java.
+4. Ajusta la memoria. Asigna una cantidad de RAM adecuada para tu equipo y tu servidor.
+5. Haz una prueba. Antes de confiarle un servidor importante a una nueva configuración, prueba primero con un servidor de prueba.
+6. Guarda una copia de seguridad. Protege tus mundos y archivos antes de realizar cambios importantes.
+⚙️ Configuración y administración
+Rutas de archivos
+Utiliza las rutas correspondientes a tu propio equipo. Una ruta que funciona en el ordenador de otra persona puede no existir en el tuyo, especialmente si incluye un nombre de usuario de Windows o una carpeta personal.
+Memoria RAM
+La memoria necesaria depende de la versión de Minecraft, la cantidad de jugadores, los mods y los plugins. Si el sistema se queda sin memoria, reduce la asignación o revisa qué otros programas están consumiendo recursos.
+Java
+Si un servidor no inicia, comprueba que la ruta de Java sea correcta y que esa instalación sea compatible con el servidor. Puedes revisar la versión disponible en una terminal con:
 java -version
-```
-
-Si tienes varias instalaciones de Java, verifica que CraftPanel utilice la ruta correcta.
-
----
-
-## 🗂️ Gestión de servidores
-
-Antes de iniciar un servidor, comprueba:
-
-- Que hayas seleccionado el servidor correcto.
-- Que la ruta configurada sea válida.
-- Que Java esté disponible y sea compatible.
-- Que exista suficiente memoria RAM.
-- Que tengas espacio libre en disco.
-- Que los archivos necesarios estén presentes.
-
-### Eliminación de servidores
-
-Eliminar un servidor puede significar borrar solamente su registro en CraftPanel o eliminar también sus archivos del disco, dependiendo de la función utilizada.
-
-Antes de confirmar una eliminación:
-
-1. Verifica el nombre del servidor.
-2. Revisa la ruta completa.
-3. Guarda una copia de los mundos y archivos importantes.
-4. Confirma qué datos se eliminarán.
-5. Comprueba que la copia de seguridad esté guardada fuera de la carpeta afectada.
-
-Las eliminaciones de archivos pueden ser irreversibles.
-
----
-
-## 🔐 Seguridad y privacidad
-
-La seguridad es importante tanto para el desarrollador como para quienes utilizan CraftPanel.
-
-- No publiques contraseñas ni credenciales.
-- No distribuyas archivos que contengan cuentas personales.
-- No subas tokens, cookies de sesión o claves privadas.
-- No publiques mundos privados ni configuraciones con información sensible.
-- Utiliza contraseñas únicas y robustas.
-- Mantén los datos de cada instalación separados.
-- Haz copias de seguridad antes de modificar o eliminar archivos.
-- No expongas la interfaz Web a Internet sin revisar primero su seguridad.
-- Revisa los archivos incluidos en cada ZIP antes de compartirlo.
-
-### Preparar una versión para otros usuarios
-
-Antes de distribuir CraftPanel:
-
-1. Prueba el paquete en una instalación limpia.
-2. Comprueba que no contenga tus datos personales.
-3. Verifica que el sistema de registro inicial funcione como esperas.
-4. Revisa las rutas configuradas.
-5. Elimina registros y archivos temporales que puedan contener información privada.
-6. Incluye instrucciones claras.
-7. Prueba nuevamente el ZIP extraído en una carpeta nueva.
-
-**Nunca distribuyas una copia que contenga las cuentas de usuario de tu propia instalación.**
-
----
-
-## 🧰 Solución de problemas
-
-### CraftPanel Web no inicia
-
-Prueba lo siguiente:
-
-```bash
-node --version
-npm --version
-npm install
-npm start
-```
-
-Si el problema continúa:
-
-- Comprueba que estés en la carpeta correcta.
-- Revisa el mensaje de error completo.
-- Verifica que la versión de Node.js sea compatible.
-- Comprueba que el puerto configurado no esté ocupado.
-
-### No puedo acceder desde el navegador
-
-- Confirma que CraftPanel siga ejecutándose.
-- Abre la dirección indicada en la terminal.
-- Comprueba si el puerto ha cambiado.
-- Revisa el firewall si corresponde.
-
-La aplicación puede estar configurada únicamente para conexiones locales.
-
-### El servidor de Minecraft no inicia
-
-- Comprueba la ruta de Java.
-- Verifica la compatibilidad de Java con Minecraft.
-- Revisa que los archivos del servidor estén presentes.
-- Comprueba la memoria RAM asignada.
-- Consulta los registros del servidor para identificar el error.
-
-### CraftPanel muestra usuarios existentes
-
-Comprueba que estés utilizando un paquete limpio preparado para una instalación nueva.
-
-No borres archivos de usuarios sin comprender cómo los utiliza la aplicación. Si necesitas conservar los datos de una instalación anterior, realiza primero una copia de seguridad.
-
-### La aplicación falla después de actualizar
-
-- Conserva una copia de seguridad.
-- Consulta las notas de la versión.
-- Evita mezclar archivos de versiones diferentes.
-- Comprueba la compatibilidad de los datos existentes.
-
----
-
-## 🗺️ Hoja de ruta
-
-Las siguientes ideas representan posibles mejoras futuras, no funciones garantizadas ni fechas confirmadas.
+Eliminar servidores o archivos
+Las operaciones de eliminación pueden borrar datos importantes, como mundos, configuraciones, complementos y registros. Antes de confirmar una eliminación:
+- Confirma el nombre del servidor y la ruta completa.
+- Comprueba qué datos serán eliminados.
+- Guarda los archivos que quieras conservar.
+- Mantén la copia de seguridad fuera de la carpeta que vas a eliminar.
+No continúes si no estás seguro de qué operación se ejecutará.
+🔐 Seguridad y privacidad
+La seguridad también depende de cómo se configure y distribuya la aplicación. Para utilizar y compartir CraftPanel responsablemente:
+- No publiques contraseñas, tokens, cookies de sesión ni claves privadas.
+- No subas datos de usuarios reales ni bases de datos de tu instalación.
+- No compartas mundos privados ni configuraciones que contengan información personal.
+- Revisa los archivos JSON y los registros antes de subirlos a GitHub.
+- Usa una instalación limpia para preparar paquetes destinados a otras personas.
+- No expongas la interfaz Web directamente a Internet sin revisar primero su autenticación, permisos, configuración de red y firewall.
+- Haz copias de seguridad antes de actualizar, migrar o eliminar datos.
+Antes de publicar una nueva versión
+1. Prueba el paquete en una carpeta o instalación limpia.
+2. Verifica que no incluya cuentas personales ni archivos sensibles.
+3. Comprueba que las rutas no dependan del ordenador del desarrollador.
+4. Incluye instrucciones de instalación y requisitos.
+5. Extrae el ZIP final en otra carpeta y comprueba el funcionamiento del paquete.
+🧰 Solución de problemas
+CraftPanel Web no inicia
+- Comprueba que Node.js y npm estén instalados:
+  node --version
+  npm --version
+- Ejecuta los comandos dentro de la carpeta correcta.
+- Vuelve a instalar las dependencias con npm install.
+- Inicia la aplicación con npm start.
+- Lee el mensaje de error completo y comprueba que el puerto configurado no esté ocupado.
+No puedo abrir la interfaz en el navegador
+- Verifica que CraftPanel siga en ejecución.
+- Utiliza la dirección que indique la terminal.
+- Comprueba si el puerto está ocupado o si el firewall bloquea la conexión.
+- Recuerda que la aplicación puede estar configurada para aceptar únicamente conexiones locales.
+El servidor de Minecraft no inicia
+- Verifica que los archivos del servidor existan.
+- Comprueba la ruta y compatibilidad de Java.
+- Revisa la memoria RAM asignada y el espacio disponible.
+- Consulta la consola y los registros del servidor para identificar el error original.
+Las rutas no funcionan en otro ordenador
+Configura rutas válidas para el equipo donde está instalado CraftPanel. No distribuyas configuraciones con rutas personales tomadas de tu propio ordenador.
+Aparecen usuarios de otra instalación
+No distribuyas una instalación con cuentas ajenas. Utiliza un paquete limpio preparado para una instalación nueva. Antes de borrar datos, verifica cómo los utiliza la aplicación y conserva una copia de seguridad si necesitas mantenerlos.
+Si informas de un problema en GitHub, incluye la versión de CraftPanel, el sistema operativo, los pasos para reproducirlo y el mensaje de error. Elimina antes cualquier contraseña, token o dato privado.
+🗺️ Hoja de ruta
+CraftPanel puede seguir mejorando gracias a las pruebas y sugerencias de la comunidad. Estas son áreas posibles de mejora, no promesas de funciones ni fechas confirmadas:
+- [ ] Ampliar y actualizar las guías de instalación.
+- [ ] Facilitar la configuración inicial en instalaciones nuevas.
+- [ ] Mejorar la validación de rutas y versiones de Java.
+- [ ] Hacer más claros los mensajes de error.
+- [ ] Documentar las operaciones que eliminan archivos.
+- [ ] Mejorar las instrucciones para copias de seguridad y restauración.
+- [ ] Revisar el aislamiento de datos entre instalaciones.
+- [ ] Publicar notas de versión con cambios y correcciones.
+- [ ] Incorporar ideas y contribuciones de la comunidad.
+Las propuestas son bienvenidas. Puedes abrir una incidencia para plantear una mejora o informar de un problema.
+🤝 Participa en CraftPanel
+CraftPanel es un proyecto público y abierto a la colaboración. Puedes utilizarlo, revisar su código, adaptarlo a tu flujo de trabajo y compartir mejoras bajo los términos de la licencia MIT.
+Puedes participar de varias maneras:
+- ⭐ Dar una estrella al repositorio en GitHub para ayudar a que otras personas lo descubran.
+- 🐛 Informar de errores con pasos claros para reproducirlos.
+- 💡 Proponer nuevas funciones o mejoras de uso.
+- 📖 Corregir o ampliar la documentación.
+- 🔧 Modificar el código y enviar tus cambios al proyecto.
+- 🌱 Crear una versión adaptada a tus necesidades, respetando la licencia y los avisos de derechos de autor aplicables.
+Cómo enviar una contribución
+1. Crea un fork del repositorio.
+2. Crea una rama para tu mejora.
+3. Haz los cambios y prueba lo que hayas modificado.
+4. Explica claramente qué cambiaste y por qué.
+5. Abre un pull request para proponer que tus cambios se incorporen al proyecto original.
+Si prefieres trabajar en tu propia versión, la licencia MIT también permite redistribuir modificaciones de acuerdo con sus condiciones. Procura documentar tus cambios para que otras personas puedan entenderlos.
+Al publicar incidencias, capturas o registros, no incluyas contraseñas, tokens, datos personales ni archivos privados.
+📄 Licencia
+CraftPanel se distribuye bajo la licencia MIT. Esta licencia permite, entre otras cosas, utilizar, copiar, modificar, fusionar, publicar, distribuir, sublicenciar y vender copias del software, siempre sujeto a las condiciones de la licencia.
+En particular, debes conservar el aviso de copyright y el texto de permiso de la licencia en las copias o partes sustanciales del software. El software se proporciona “tal cual”, sin garantías, en los términos descritos en la licencia.
+Consulta el archivo LICENSE incluido en el repositorio para leer el texto completo.
+La licencia MIT del proyecto no reemplaza las licencias de bibliotecas, dependencias, iconos u otros recursos de terceros. Cada componente de terceros sigue sujeto a sus propios términos.
+⚖️ Aviso sobre Minecraft
+CraftPanel es un proyecto independiente y no está afiliado, respaldado ni aprobado oficialmente por Mojang Studios o Microsoft. Minecraft y sus marcas pertenecen a sus respectivos titulares.
+Quienes utilicen CraftPanel son responsables de respetar los términos y las licencias aplicables al juego, al software de servidor y a los recursos que instalen o distribuyan.
+💚 Gracias
+Gracias por probar CraftPanel, compartir comentarios, informar de errores o contribuir con código y documentación. La participación de la comunidad ayuda a identificar problemas, proponer ideas y hacer que el proyecto sea más útil para todos.
+<p align="center">
+  <strong>CraftPanel</strong><br>
+  <em>Tu servidor. Tu configuración. Tu control.</em>
+</p>
 
 - [ ] Mejorar la documentación de instalación.
 - [ ] Facilitar la configuración inicial.
