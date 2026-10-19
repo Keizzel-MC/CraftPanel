@@ -1,0 +1,19 @@
+TWINKLE DESKTOP 2.0.2 — PREPARADO PARA INSTALACIÓN LIMPIA
+
+CAMBIOS
+- El instalador NO incluye users.json.
+- En el primer inicio, Desktop crea un users.json vacío dentro del directorio de datos local de Electron.
+- server.js no contiene ninguna cuenta predefinida ni valores de hash de un usuario personal.
+- Los usuarios de instalaciones anteriores se conservan para evitar pérdida de acceso en actualizaciones.
+- Se mantienen las mejoras de eliminación de servidores, selección Java y compilación del instalador.
+
+INSTALACIÓN
+1. Extrae el ZIP y abre Twinkle-Desktop.
+2. Ejecuta CREAR-INSTALADOR-WINDOWS.bat (requiere Node.js y conexión a Internet).
+3. Abre el instalador creado en dist.
+4. En un perfil de Windows que nunca haya usado Twinkle se solicitará crear el primer usuario administrador.
+
+IMPORTANTE
+- El proyecto es código fuente, no es un instalador .exe.
+- Para probar el flujo del primer inicio en tu propio perfil, NO borres los datos existentes sin una copia de seguridad. Usa otro perfil de Windows o una máquina virtual.
+- No se ha ejecutado el instalador en Windows desde este entorno.

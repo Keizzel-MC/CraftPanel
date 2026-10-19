@@ -1,0 +1,16 @@
+TWINKLE DESKTOP 2.0.2 - INSTALACIONES Y ACTUALIZACIONES
+
+Primera instalación:
+- Ejecuta CREAR-INSTALADOR-WINDOWS.bat para construir el instalador.
+- El instalador NO incluye users.json ni cuentas predeterminadas.
+- En el primer inicio, Twinkle crea users.json vacío y pide crear la primera cuenta administradora.
+
+Actualizaciones:
+- Instala la nueva versión sobre la anterior usando el mismo identificador de aplicación.
+- Electron conserva los datos en su carpeta de usuario (app.getPath('userData')/data).
+- Si users.json ya existe, no se modifica, borra ni sobreescribe; la cuenta existente puede iniciar sesión.
+- Mantén copias de seguridad antes de actualizar. No borres manualmente la carpeta AppData.
+
+Esta descarga contiene el proyecto fuente, no un EXE compilado.
+
+REBRANDING: CraftPanel ahora se llama Twinkle (by Keizzel). Tus datos de CraftPanel se copian solos la primera vez que abras Twinkle.

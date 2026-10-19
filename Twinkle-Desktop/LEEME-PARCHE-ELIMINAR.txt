@@ -1,0 +1,18 @@
+Twinkle Desktop 2.0.2 — mejora de eliminación de servidores
+
+Esta versión cambia el botón en «Servidores» a «Quitar / eliminar servidor».
+- «Quitar del panel»: conserva mundo, mods y todos los archivos; elimina solamente el registro del panel.
+- «Eliminar servidor y todos sus archivos»: requiere escribir el nombre exacto; borra la carpeta completa.
+- Si Windows responde EPERM/EACCES/EBUSY, mostrará consejos sobre bloqueo, permisos y OneDrive. Puede haber borrado parcial: conserva una copia de seguridad antes de eliminar.
+- No se pueden eliminar carpetas protegidas ni una carpeta que contenga otro servidor registrado.
+
+CÓMO CREAR EL INSTALADOR
+1. Descomprime en una carpeta nueva.
+2. Instala Node.js LTS en Windows.
+3. Ejecuta CREAR-INSTALADOR-WINDOWS.bat. Descarga dependencias y ejecuta electron-builder.
+4. Abre el instalador generado en dist.
+
+DATOS EXISTENTES
+La app instalada guarda config.json y users.json en su carpeta userData/data de Electron. Una reinstalación puede conservar estos datos. Este paquete trae archivos config.json y users.json vacíos en cuanto a servidores y cuentas; NO sustituye automáticamente los datos existentes.
+
+No probado en un instalador Windows real desde este entorno.

@@ -1,0 +1,64 @@
+{
+  "name": "twinkle-desktop",
+  "productName": "Twinkle",
+  "version": "2.0.2",
+  "description": "Panel de escritorio para administrar servidores de Minecraft",
+  "author": "Keizzel",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.twinkle.desktop",
+    "productName": "Twinkle",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "server.js",
+      "index.html",
+      "twinkle-modules.js",
+      "package.json",
+      "config.json",
+      "icon.ico",
+      "installer-sidebar.bmp",
+      "installer-header.bmp",
+      "public/**/*",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Twinkle",
+      "installerSidebar": "installer-sidebar.bmp",
+      "uninstallerSidebar": "installer-sidebar.bmp",
+      "installerHeader": "installer-header.bmp",
+      "installerHeaderIcon": "icon.ico",
+      "include": "build/installer.nsh",
+      "artifactName": "Twinkle-Setup-${version}.${ext}",
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "icon.ico"
+    },
+    "copyright": "Copyright © 2026 Keizzel"
+  }
+}

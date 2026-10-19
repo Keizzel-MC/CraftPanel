@@ -1,0 +1,2245 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Twinkle 2.0.2 · by Keizzel</title>
+<link rel="icon" type="image/png" href="/twinkle-logo.png?v=1">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1020;--ac:#8A5CFF;--ok:#4ade80;--bad:#f0566a;--warn:#f5b94a;--tx:#e8e6f5;--mu:#8f8ba8;--gl:rgba(255,255,255,.055);--bd:rgba(255,255,255,.1)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--tx);font:14px Sora,system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(40vw 40vw at 12% 8%,#3b2a9a88,transparent),radial-gradient(35vw 35vw at 88% 30%,#0e7a8f55,transparent),radial-gradient(45vw 45vw at 40% 105%,#7a1f6a55,transparent)}
+.glass{background:var(--gl);backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%);border:1px solid var(--bd);border-radius:16px;box-shadow:0 8px 32px #0006}
+[hidden]{display:none!important}
+input,select,textarea,button{font:inherit;color:inherit}
+input,select,textarea{background:#0005;border:1px solid var(--bd);border-radius:10px;padding:9px 12px;width:100%;outline:none}
+input:focus,select:focus,textarea:focus,button:focus-visible{border-color:var(--ac);box-shadow:0 0 0 3px #8A5CFF40}
+button{background:var(--gl);border:1px solid var(--bd);border-radius:10px;padding:8px 14px;cursor:pointer;transition:.15s}
+button:hover:not(:disabled){background:#ffffff1c}
+button:disabled{opacity:.35;cursor:not-allowed}
+button.p{background:var(--ac);border-color:var(--ac);color:#10091f;font-weight:600}
+button.d{color:var(--bad);border-color:#f0566a55}
+#login{width:min(380px,92vw);margin:14vh auto 0;padding:32px;display:grid;gap:14px}
+#login h1{margin:0;font-size:22px}
+#err{color:var(--bad);min-height:18px;margin:0;font-weight:600}
+#app{display:grid;grid-template-columns:220px 1fr;gap:16px;padding:16px;height:100vh}
+aside{padding:18px;display:flex;flex-direction:column;gap:6px}
+aside h1{font-size:18px;margin:0 0 14px}.brand-title{display:flex;align-items:center;gap:9px}.brand-mark{display:inline-block;image-rendering:pixelated;border-radius:6px;box-shadow:0 0 14px #4DA3FF40}
+aside nav{display:grid;gap:4px;flex:1;align-content:start}
+nav button{text-align:left;border-color:transparent;background:none;color:var(--mu)}
+nav button.on{background:#8A5CFF2e;color:var(--tx);border-color:#8A5CFF55}
+main{display:flex;flex-direction:column;gap:16px;min-height:0}
+header{padding:16px 20px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center}
+header h2{margin:0;font-size:18px}
+.chip{color:var(--mu)}.chip b{color:var(--tx);font-weight:600}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--bad);margin-right:8px}
+.online .dot{background:var(--ok);box-shadow:0 0 10px var(--ok)}.starting .dot,.stopping .dot{background:var(--warn)}
+.pw{margin-left:auto;display:flex;gap:8px}
+section{flex:1;min-height:0;padding:18px;display:flex;flex-direction:column;gap:12px;overflow:auto}
+#con{flex:1;overflow:auto;background:#0006;border-radius:12px;padding:12px;font:12.5px/1.55 'JetBrains Mono',Consolas,monospace;white-space:pre-wrap;word-break:break-all}
+.W{color:var(--warn)}.E{color:var(--bad)}.C{color:var(--ac)}
+.row{display:flex;gap:10px;align-items:center}
+.row>button{flex:none}
+.list{display:grid;gap:8px}
+.item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#ffffff0a;border-radius:12px}
+.item .n{flex:1;overflow:hidden;text-overflow:ellipsis}
+.item.f{cursor:pointer}.item.f:hover{background:#ffffff14}.item.f.sel{background:#8A5CFF35;border:1px solid #8A5CFF88}.filetools{position:sticky;top:10px;z-index:8;display:flex;flex-wrap:wrap;gap:7px;align-items:center;padding:10px 12px;margin:0 0 12px;background:rgba(67,62,96,.84);backdrop-filter:blur(18px) saturate(145%);-webkit-backdrop-filter:blur(18px) saturate(145%);border:1px solid rgba(255,255,255,.24);border-radius:16px;box-shadow:0 8px 22px rgba(0,0,0,.14)}.filetools button{padding:7px 10px;flex:none}.filehint{font-size:12px;color:var(--mu)}
+.mu{color:var(--mu)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.grid label{display:grid;gap:5px;color:var(--mu);font-size:12px}
+#ed{flex:1;min-height:300px;font:12.5px/1.5 'JetBrains Mono',Consolas,monospace}
+#toast{position:fixed;bottom:22px;right:22px;padding:12px 18px;z-index:9}
+#dz{position:fixed;inset:0;z-index:20;display:grid;place-items:center;background:rgba(9,8,19,.5);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);pointer-events:none;animation:fin .18s ease-out}
+@keyframes fin{from{opacity:0}}
+#dzb{--c:var(--ac);width:min(560px,86vw);height:300px;border-radius:24px;display:grid;place-content:center;justify-items:center;gap:8px;text-align:center;background-color:rgba(138,92,255,.1);
+ background-image:repeating-linear-gradient(90deg,var(--c) 0 12px,transparent 12px 22px),repeating-linear-gradient(90deg,var(--c) 0 12px,transparent 12px 22px),repeating-linear-gradient(0deg,var(--c) 0 12px,transparent 12px 22px),repeating-linear-gradient(0deg,var(--c) 0 12px,transparent 12px 22px);
+ background-position:0 0,0 100%,0 0,100% 0;background-size:100% 2px,100% 2px,2px 100%,2px 100%;background-repeat:no-repeat;animation:march 1s linear infinite;transition:transform .2s,background-color .2s,box-shadow .2s}
+@keyframes march{to{background-position:22px 0,-22px 100%,0 -22px,100% 22px}}
+.hot #dzb{transform:scale(1.04);background-color:rgba(138,92,255,.22);box-shadow:0 0 60px #8A5CFF55}
+.no #dzb{--c:var(--bad);background-color:rgba(240,86,106,.1)}
+#dzb svg{width:84px;height:84px;color:var(--c);transition:transform .25s}
+.hot #dzb svg{transform:translateY(-6px) scale(1.12)}
+#dzt{font-size:18px;font-weight:600}#dzs{color:var(--mu);font-size:13px}
+.fc{position:absolute;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:11px;font-weight:700;background:var(--gl);border:1px solid var(--bd);backdrop-filter:blur(10px);transition:translate .25s ease-out}
+#dzi{position:fixed;left:0;top:0;width:54px;height:68px;filter:drop-shadow(0 10px 20px #0008);transition:transform .08s linear;transform:translate(-200px,-200px)}
+#dzi em{position:absolute;top:-8px;right:-8px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;display:grid;place-items:center;font:600 12px Sora,sans-serif;font-style:normal;background:var(--ac);color:#10091f}
+#ut{position:fixed;right:22px;bottom:84px;width:min(300px,90vw);z-index:9;display:grid;gap:8px}
+.ur{position:relative;display:flex;justify-content:space-between;gap:10px;padding:10px 14px 14px;font-size:13px;overflow:hidden}
+.ur span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ur i{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--ac);transition:width .15s}
+.ur.bad i{background:var(--bad)}.ur.bad b{color:var(--bad)}
+@media(max-width:760px){#app{grid-template-columns:1fr;height:auto}aside{flex-direction:row;flex-wrap:wrap}aside nav{display:flex;flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* Iconos de ayuda para todos los campos rellenables */
+.field-info{display:inline-grid;place-items:center;width:17px;height:17px;min-width:17px;padding:0;margin-left:5px;border-radius:50%;border:1px solid #a99cff;color:#d9d1ff;background:#8A5CFF24;font:700 11px/1 Sora,sans-serif;vertical-align:middle;cursor:help;position:relative}
+.field-info:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.grid label:has(.field-info){grid-template-columns:minmax(0,1fr) auto;align-items:center}.grid label:has(.field-info)>input,.grid label:has(.field-info)>select,.grid label:has(.field-info)>textarea{grid-column:1/-1}.field-info{justify-self:end}
+.field-info[data-tip]:hover::after,.field-info[data-tip]:focus-visible::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 9px);transform:translateX(-50%);width:max-content;max-width:min(280px,75vw);white-space:normal;text-align:left;line-height:1.45;font:12px/1.45 Sora,system-ui,sans-serif;color:var(--tx);background:#211d35;border:1px solid #8A5CFF88;border-radius:9px;padding:9px 11px;box-shadow:0 8px 24px #0008;z-index:100;pointer-events:none}
+
+
+/* Twinkle verde */
+:root{--bg:#0B1020;--ac:#4DA3FF;--ok:#4ade80;--bad:#fb7185;--warn:#fbbf24;--tx:#EAF4FF;--mu:#8FA3C7;--gl:rgba(17,24,45,.78);--bd:rgba(138,170,255,.16)}
+body{background:radial-gradient(ellipse at 12% 0%,rgba(138,92,255,.10),transparent 38%),var(--bg)!important;color:var(--tx)}
+header,.topbar,.sidebar,.side,.panel,.card,.modal,.box,.section,.server-card,.stat-card{border-color:var(--bd)!important}
+header,.topbar{background:rgba(11,16,32,.88)!important;backdrop-filter:blur(14px)}
+.sidebar,.side{background:rgba(10,12,28,.94)!important}
+.panel,.card,.box,.section,.server-card,.stat-card{background:linear-gradient(145deg,rgba(20,22,51,.88),rgba(10,12,26,.92))!important;border:1px solid var(--bd)!important;border-radius:16px!important;box-shadow:0 12px 32px rgba(0,0,0,.16)}
+button,.btn{border-radius:10px!important;transition:transform .16s ease,border-color .16s ease,filter .16s ease}
+button:hover,.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+button.primary,.btn-primary,.primary{background:linear-gradient(135deg,#4DA3FF,#8A5CFF)!important;color:#040619!important;border-color:rgba(77,163,255,.4)!important}
+input,select,textarea{background:#0a0c1c!important;color:var(--tx)!important;border:1px solid rgba(138,170,255,.22)!important;border-radius:10px!important;outline:none}
+input:focus,select:focus,textarea:focus{border-color:#4DA3FF!important;box-shadow:0 0 0 3px rgba(77,163,255,.12)!important}
+a{color:#86efac}
+.badge,.pill{border-radius:999px}
+hr{border-color:var(--bd)!important}
+::-webkit-scrollbar{width:9px;height:9px}::-webkit-scrollbar-thumb{background:#292e61;border-radius:9px}::-webkit-scrollbar-track{background:#0a0c1c}
+@media(max-width:800px){.sidebar,.side{max-width:100%}.panel,.card,.box,.section,.server-card{border-radius:12px!important}button,.btn{max-width:100%}}
+
+
+/* ========================================================
+   TWINKLE 2.0.2 - DISEÑO PULIDO (THEME COSMIC & GLASS)
+   Created by Keizzel
+======================================================== */
+:root {
+  --bg: #070b08;
+  --bg-card: rgba(13,15,35, 0.82);
+  --bg-input: #080a19;
+  --ac: #4DA3FF;
+  --ac-glow: rgba(77,163,255, 0.35);
+  --ac-hover: #7BBBFF;
+  --ok: #4ade80;
+  --bad: #fb7185;
+  --warn: #fbbf24;
+  --tx: #EAF4FF;
+  --mu: #8FA3C7;
+  --gl: rgba(14,16,38, 0.82);
+  --bd: rgba(138,170,255, 0.18);
+  --bd-hover: rgba(77,163,255, 0.4);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 15% 0%, rgba(138,92,255, 0.14), transparent 45%),
+              radial-gradient(ellipse at 85% 100%, rgba(20,32,120, 0.18), transparent 50%),
+              var(--bg) !important;
+  color: var(--tx);
+  font: 14px/1.5 Sora, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Marca de agua sutil en sidebar */
+.brand-watermark {
+  font-size: 10.5px;
+  color: var(--mu);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-top: 3px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.brand-watermark b {
+  color: var(--ac);
+  font-weight: 700;
+}
+
+/* Nav pills pulidos */
+nav button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-weight: 500;
+  transition: all 0.18s ease;
+}
+nav button:hover {
+  background: rgba(77,163,255, 0.08);
+  color: var(--tx);
+  transform: translateX(2px);
+}
+nav button.on {
+  background: linear-gradient(135deg, rgba(77,163,255, 0.18), rgba(138,92,255, 0.08)) !important;
+  color: #4DA3FF !important;
+  border-color: rgba(77,163,255, 0.38) !important;
+  font-weight: 600;
+  box-shadow: 0 0 16px rgba(77,163,255, 0.12);
+}
+
+/* Paneles y tarjetas */
+.panel, .card, .box, .section, .server-card, .stat-card, .item {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--bd) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.item:hover {
+  border-color: var(--bd-hover) !important;
+}
+
+/* Consola profesional */
+.console-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: 8px;
+}
+.console-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 12px;
+  border: 1px solid var(--bd);
+}
+#con {
+  flex: 1;
+  overflow: auto;
+  background: #050906 !important;
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  padding: 14px;
+  font: 12.5px/1.6 'JetBrains Mono', Consolas, monospace;
+  white-space: pre-wrap;
+  word-break: break-all;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+}
+#con .W { color: #fbbf24; font-weight: 500; }
+#con .E { color: #fb7185; font-weight: 600; }
+#con .C { color: #4DA3FF; }
+#con .I { color: #93c5fd; }
+#con .time-tag { color: #525694; margin-right: 7px; font-size: 11px; }
+
+/* Grid del inventario de Minecraft estilo juego */
+.mc-inv-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: rgba(5, 10, 7, 0.85);
+  border: 2px solid rgba(138,170,255, 0.25);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+}
+.mc-slots-grid {
+  display: grid;
+  gap: 6px;
+}
+.mc-slot {
+  width: 44px;
+  height: 44px;
+  background: #14162d;
+  border: 2px solid #232650;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.4);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+}
+.mc-slot:hover {
+  border-color: #4DA3FF;
+  transform: scale(1.06);
+  z-index: 5;
+}
+.mc-slot.has-item {
+  background: #191c3b;
+  border-color: #3b4081;
+}
+.mc-slot-count {
+  position: absolute;
+  right: 2px;
+  bottom: 1px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 10px;
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  pointer-events: none;
+}
+.mc-item-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Gráficos de Monitoreo Canvas */
+.chart-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.chart-canvas {
+  width: 100%;
+  height: 110px;
+  display: block;
+}
+
+/* Tarjetas de Instalador con iconos */
+.srv-type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+.srv-type-card {
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--bd);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.srv-type-card:hover {
+  border-color: var(--ac);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(77,163,255, 0.15);
+}
+.srv-type-card.selected {
+  border-color: var(--ac);
+  background: linear-gradient(145deg, rgba(138,92,255, 0.16), rgba(10,12,29, 0.95)) !important;
+  box-shadow: 0 0 18px rgba(77,163,255, 0.2);
+}
+
+/* ---- Twinkle Cosmic ---- */
+:root{--bg:#0B1020;--bg2:#11182D;--ac:#4DA3FF;--ac2:#8A5CFF;--glow:#9FE7FF;--tx:#EAF4FF;--mu:#8FA3C7}
+body{background:radial-gradient(ellipse at 12% -5%,rgba(138,92,255,.22),transparent 42%),radial-gradient(ellipse at 92% 6%,rgba(77,163,255,.16),transparent 40%),var(--bg)!important}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.55;background-image:radial-gradient(1.2px 1.2px at 12% 18%,#EAF4FF,transparent),radial-gradient(1px 1px at 78% 12%,#9FE7FF,transparent),radial-gradient(1.4px 1.4px at 44% 36%,#EAF4FF,transparent),radial-gradient(1px 1px at 88% 52%,#9FE7FF,transparent),radial-gradient(1.2px 1.2px at 27% 74%,#EAF4FF,transparent),radial-gradient(1px 1px at 62% 86%,#EAF4FF,transparent),radial-gradient(1.4px 1.4px at 8% 92%,#9FE7FF,transparent);animation:twk 6s ease-in-out infinite alternate}
+@keyframes twk{from{opacity:.25}to{opacity:.6}}
+.tw-brand{background:linear-gradient(90deg,#9FE7FF,#4DA3FF 45%,#8A5CFF);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+.tw-spark{color:#9FE7FF;margin-left:4px;font-size:.8em;display:inline-block;animation:tws 3s ease-in-out infinite}
+@keyframes tws{50%{transform:scale(1.25) rotate(15deg);opacity:.7}}
+button.p,.btn-primary{background:linear-gradient(135deg,#4DA3FF,#8A5CFF)!important;border-color:transparent!important;color:#fff!important;box-shadow:0 0 18px rgba(77,163,255,.45),0 0 34px rgba(138,92,255,.25)!important}
+button.p:hover:not(:disabled){box-shadow:0 0 24px rgba(77,163,255,.65),0 0 46px rgba(138,92,255,.4)!important}
+.glass{border-radius:18px}
+.login-logo{display:block;margin:0 auto 2px;width:76px;height:76px;filter:drop-shadow(0 0 18px rgba(77,163,255,.6))}
+#login h1{text-align:center}
+@media(prefers-reduced-motion:reduce){body::after,.tw-spark{animation:none}}
+/* ---- Twinkle · más aire entre elementos ---- */
+#app{gap:24px!important;padding:24px!important;grid-template-columns:240px 1fr!important}
+aside{padding:24px 20px!important;gap:10px!important}
+aside nav{gap:8px!important}
+nav button{padding:11px 14px!important}
+main{gap:24px!important}
+header{padding:22px 28px!important;gap:18px 36px!important}
+section{padding:28px!important;gap:24px!important}
+section .glass[style*="padding"]{padding:24px!important}
+section [style*="display:grid"][style*="gap:10px"],section [style*="display:grid"][style*="gap:8px"]{gap:18px!important}
+.row{gap:14px!important;flex-wrap:wrap}
+.list{gap:12px!important}
+.item{padding:14px 18px!important;gap:14px!important}
+.grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))!important;gap:22px 24px!important}
+.grid label,label{gap:8px!important}
+.grid label:has(.field-info)>div{grid-column:1/-1}
+.card{padding:22px!important;gap:16px!important}
+.bk,.bkl{gap:24px!important}
+input,select,textarea{padding:11px 14px!important}
+button{padding:10px 18px!important}
+.field-info{margin-left:8px!important;padding:0!important;width:17px!important;height:17px!important;line-height:1!important}
+#me{margin-top:14px}
+aside{overflow-y:auto}
+h2,h3{margin-bottom:6px}
+p{line-height:1.55}
+#login:not([hidden]){position:fixed!important;top:50%!important;left:50%!important;transform:translate(-50%,-50%);margin:0!important;width:min(420px,92vw)!important;padding:40px 36px!important;gap:20px!important;max-height:94vh;overflow:auto}
+@media(max-width:760px){#app{padding:14px!important;gap:16px!important}section{padding:18px!important}}
+</style>
+
+<div id="login" class="glass" hidden>
+  <img class="login-logo" src="/twinkle-logo.png?v=1" alt="Twinkle">
+  <h1 id="lt">Iniciar sesión</h1>
+  <input id="u" placeholder="Usuario" autocomplete="username">
+  <input id="p" type="password" placeholder="Contraseña" autocomplete="current-password">
+  <p id="err"></p>
+  <button class="p" id="lb">Entrar</button>
+  <button id="switchAuth" type="button" hidden>Crear una cuenta</button>
+</div>
+
+<div id="app" hidden>
+  <aside class="glass">
+    <h1 class="brand-title">
+    <img class="brand-mark" src="/twinkle-logo.png?v=1" alt="" width="28" height="28">
+    <div>
+      <div style="line-height:1.1"><span class="tw-brand">Twinkle</span><span class="tw-spark">✦</span> <span style="font-size:11px;background:rgba(77,163,255,0.15);color:#4DA3FF;padding:2px 6px;border-radius:6px;font-weight:700">2.0.2</span></div>
+      <div class="brand-watermark"><span>por</span> <b>Keizzel</b></div>
+    </div>
+  </h1><nav id="nav"></nav>
+    <div class="mu" id="me"></div><button id="out">Cerrar sesión</button>
+  </aside>
+  <main>
+    <header class="glass" id="hd">
+      <h2><span class="dot"></span><span id="st">Apagado</span></h2>
+      <div id="hdrSrvBox" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.06);padding:4px 10px;border-radius:10px;border:1px solid var(--bd)">
+        <span class="chip" style="font-size:12px">Servidor:</span>
+        <select id="quickSrv" style="width:auto;padding:2px 6px;font-size:12px;background:none;border:none;font-weight:600;cursor:pointer"></select>
+      </div>
+      <span class="chip">Jugadores <b id="pc">0</b></span>
+      <span class="chip">Tiempo activo <b id="up">—</b></span>
+      <span class="chip">CPU servidor <b id="cp">—</b></span>
+      <span class="chip">RAM Servidor <b id="rm">—</b></span>
+      <div class="pw">
+        <button data-a="start">Iniciar</button><button data-a="restart">Reiniciar</button>
+        <button data-a="stop">Detener</button><button data-a="kill" class="d">Forzar cierre</button>
+      </div>
+    </header>
+    <section class="glass" id="v"></section>
+  </main>
+</div>
+<div id="toast" class="glass" hidden></div>
+<div id="ut" hidden></div>
+<div id="dz" hidden>
+  <div id="dzb">
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 44a12 12 0 0 1-1-23.9A15 15 0 0 1 48 22a11 11 0 0 1 0 22"/><path d="M32 46V28M24 35l8-8 8 8"/></svg>
+    <b id="dzt"></b><span id="dzs"></span>
+  </div>
+  <div class="fc" data-k="60" style="left:14%;top:22%;color:#f0566a">IMG</div>
+  <div class="fc" data-k="-80" style="right:16%;top:28%;color:#8A5CFF">DOC</div>
+  <div class="fc" data-k="90" style="left:20%;bottom:20%;color:#4ade80">PDF</div>
+  <div class="fc" data-k="-50" style="right:22%;bottom:18%;color:#f5b94a">VID</div>
+  <div id="dzi"></div>
+</div>
+
+<script>
+const $ = (s) => document.querySelector(s), esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+async function pickSystemPath(type = 'folder') {
+  try {
+    toast('Abriendo explorador del sistema…');
+    const res = await api('dialog/pick', 'POST', { type });
+    return res.path || '';
+  } catch (err) {
+    toast('No se pudo abrir el explorador: ' + (err.message || 'error'));
+    return '';
+  }
+}
+
+const RL = { viewer: 0, mod: 1, admin: 2 };
+const TABS = [
+  ['console', '📟 Consola', 0],
+  ['metrics', '📈 Monitor TPS/RAM', 0],
+  ['players', '👥 Jugadores', 1],
+  ['servers', '🖧 Servidores', 1],
+  ['backups', '💾 Copias de seguridad', 2],
+  ['install', '⚡ Instalador Pro', 2],
+  ['files', '📂 Archivos y Editor', 2],
+  ['mods', '🧩 Mods & Plugins', 2],
+  ['props', '⚙️ Propiedades', 2],
+  ['security', '🛡️ Auditoría', 2],
+  ['users', '👤 Usuarios', 2]
+];
+let T = localStorage.t, me, ws, cur = 'console', S = { players: [] }, dir = '', setup = false, LOG = [];
+
+const toast = (m) => { const t = $('#toast'); t.textContent = m; t.hidden = false; clearTimeout(t.h); t.h = setTimeout(() => t.hidden = true, 3500); };
+const api = async (p, m = 'GET', b) => {
+  const r = await fetch('/api/' + p, { method: m, headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + T }, body: b && JSON.stringify(b) });
+  const j = await r.json().catch(() => ({}));
+  if (r.status === 401) { logout(); throw 0; }
+  if (!r.ok) { toast(j.error || 'Algo salió mal'); throw 0; }
+  return j;
+};
+const logout = () => { localStorage.removeItem('t'); T = null; ws && ws.close(); location.reload(); };
+
+// ---- Inicio de sesión y registro público ----
+let authMode = 'login';
+async function boot() {
+  if (T) { try { me = await api('me'); return enter(); } catch { } }
+  setup = (await (await fetch('/api/setup')).json()).needed;
+  authMode = setup ? 'setup' : 'login';
+  $('#lt').textContent = setup ? 'Crea tu cuenta de administrador' : 'Iniciar sesión';
+  $('#lb').textContent = setup ? 'Crear administrador' : 'Entrar';
+  $('#switchAuth').hidden = setup;
+  $('#switchAuth').textContent = 'Crear una cuenta nueva';
+  $('#u').placeholder = 'Usuario (3–20 letras, números o _)';
+  $('#p').placeholder = 'Contraseña (mínimo 8 caracteres)';
+  $('#p').autocomplete = setup ? 'new-password' : 'current-password';
+  $('#login').hidden = false;
+}
+function switchAuth() {
+  if (setup) return;
+  authMode = authMode === 'register' ? 'login' : 'register';
+  $('#lt').textContent = authMode === 'register' ? 'Crear una cuenta' : 'Iniciar sesión';
+  $('#lb').textContent = authMode === 'register' ? 'Registrarme' : 'Entrar';
+  $('#switchAuth').textContent = authMode === 'register' ? 'Ya tengo una cuenta' : 'Crear una cuenta nueva';
+  $('#p').autocomplete = authMode === 'register' ? 'new-password' : 'current-password';
+  $('#err').textContent = '';
+}
+async function doLogin() {
+  const endpoint = authMode === 'setup' ? 'setup' : authMode === 'register' ? 'register' : 'login';
+  const r = await fetch('/api/' + endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: $('#u').value.trim(), pass: $('#p').value }) });
+  const j = await r.json();
+  if (!r.ok) return $('#err').textContent = j.error;
+  T = j.token; localStorage.t = T; me = await api('me'); $('#login').hidden = true; enter();
+}
+$('#u').onkeydown = (e) => { if (e.key === 'Enter') $('#p').focus(); };
+$('#lb').onclick = doLogin;
+$('#switchAuth').onclick = switchAuth;
+$('#p').onkeydown = (e) => { if (e.key === 'Enter') doLogin(); };
+$('#out').onclick = logout;
+
+// ---- App ----
+async function enter() {
+  $('#app').hidden = false; $('#me').textContent = me.name + ' · ' + { admin: 'administrador', mod: 'moderador', viewer: 'solo lectura' }[me.role];
+  $('#nav').innerHTML = TABS.filter((t) => RL[me.role] >= t[2]).map((t) => `<button data-t="${t[0]}">${t[1]}</button>`).join('');
+  $('#nav').onclick = (e) => e.target.dataset.t && show(e.target.dataset.t);
+  document.querySelectorAll('[data-a]').forEach((b) => { b.disabled = RL[me.role] < 1; b.onclick = () => confirmPower(b.dataset.a); });
+  connect();
+  if (RL[me.role] >= 2) {
+    try {
+      const st = await api('install/status');
+      if (!st.installed) { toast('No se detectó un servidor instalado. Configúralo desde la pestaña Instalador.'); show('install'); return; }
+    } catch {}
+  }
+  show('console');
+}
+const confirmPower = (a) => (a === 'kill' || a === 'stop' || a === 'restart') && !confirm('¿Seguro que quieres ' + { kill: 'forzar el cierre (puedes perder progreso)', stop: 'detener el servidor', restart: 'reiniciar el servidor' }[a] + '?') || api('power', 'POST', { action: a });
+
+function connect() {
+  ws = new WebSocket((location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host + '/ws?t=' + T);
+  ws.onmessage = (e) => {
+    const m = JSON.parse(e.data);
+    if (m.type === 'init') { S = m; LOG = m.log; stat(); if (cur === 'console' && $('#con')) { $('#con').innerHTML = ''; m.log.forEach(line); } }
+    if (m.type === 'status') { const ch = JSON.stringify(m.players) !== JSON.stringify(S.players); S = m; stat(); if (ch && cur === 'players') show('players'); }
+    if (m.type === 'log') { LOG.push(m.line); LOG.length > 600 && LOG.shift(); line(m.line); }
+    if (m.type === 'install') { onInstallProgress(m); }
+  };
+  ws.onclose = () => T && setTimeout(connect, 2000);
+}
+const stat = () => {
+  $('#hd').className = 'glass ' + S.status;
+  $('#st').textContent = { online: 'En línea', offline: 'Apagado', starting: 'Iniciando…', stopping: 'Deteniendo…' }[S.status];
+  $('#pc').textContent = S.players.length;
+  $('#cp').textContent = (S.cpu != null ? S.cpu : 0) + '%';
+  
+  const maxMb = S.serverMaxRamMb || 2048;
+  const usedMb = S.serverMemMb || 0;
+  const pct = S.status === 'offline' ? 0 : (S.mem != null ? S.mem : 0);
+  const ramText = maxMb >= 1024
+    ? `${pct}% (${(usedMb / 1024).toFixed(1)} / ${(maxMb / 1024).toFixed(1)} GB)`
+    : `${pct}% (${usedMb} / ${maxMb} MB)`;
+  $('#rm').textContent = ramText;
+
+  const conRam = $('#con-ram-val');
+  if (conRam) conRam.textContent = ramText;
+  const conRamBar = $('#con-ram-bar');
+  if (conRamBar) conRamBar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+
+  renderQuickSrv();
+};
+setInterval(() => { const s = S.status === 'online' ? Math.floor((Date.now() - S.started) / 1000) : null; $('#up').textContent = s === null ? '—' : `${Math.floor(s / 3600)}h ${Math.floor(s % 3600 / 60)}m ${s % 60}s`; }, 1000);
+
+
+let consoleFilter = '';
+let consoleAutoScroll = true;
+let cmdHistory = [];
+let cmdHistoryIdx = -1;
+
+function line(l) {
+  const c = $('#con'); if (!c) return;
+  const rawText = String(l);
+  if (consoleFilter && !rawText.toLowerCase().includes(consoleFilter.toLowerCase())) {
+    return;
+  }
+  const near = c.scrollHeight - c.scrollTop - c.clientHeight < 70;
+  const d = document.createElement('div');
+  
+  // Nivel de severidad
+  let tagClass = '';
+  if (/WARN|Advertencia/i.test(rawText)) tagClass = 'W';
+  else if (/ERROR|Exception|Fallo/i.test(rawText)) tagClass = 'E';
+  else if (/^(>|\[Panel\])/.test(rawText)) tagClass = 'C';
+  else if (/INFO/i.test(rawText)) tagClass = 'I';
+  
+  // Agregar hora actual o extraída
+  const timeStr = new Date().toLocaleTimeString();
+  d.className = tagClass;
+  d.innerHTML = '<span class="time-tag">[' + timeStr + ']</span>' + esc(rawText);
+  
+  c.appendChild(d);
+  while (c.children.length > 800) c.firstChild.remove();
+  if (consoleAutoScroll && near) c.scrollTop = c.scrollHeight;
+}
+
+function filterConsoleLogs() {
+  const c = $('#con'); if (!c) return;
+  c.innerHTML = '';
+  LOG.forEach(line);
+}
+
+
+async function show(t) {
+  cur = t; document.querySelectorAll('nav button').forEach((b) => b.classList.toggle('on', b.dataset.t === t));
+  const v = $('#v'); v.innerHTML = ''; v.onclick = null;
+    if (t === 'console') {
+    v.innerHTML = `
+      <div class="console-wrapper">
+        <div class="console-toolbar">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span style="font-size:13px;font-weight:700;color:var(--tx);display:flex;align-items:center;gap:6px">
+              📟 Consola en tiempo real
+            </span>
+            <input id="con-search" placeholder="🔍 Filtrar registros…" value="${esc(consoleFilter)}" style="width:180px;padding:4px 10px;font-size:12px;border-radius:8px">
+            <button id="con-clear" style="padding:4px 10px;font-size:12px">🧹 Limpiar vista</button>
+            <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer;color:var(--mu);margin:0">
+              <input type="checkbox" id="con-autoscroll" ${consoleAutoScroll ? 'checked' : ''} style="width:auto;margin:0"> Auto-scroll
+            </label>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:12px">
+            <span class="mu">RAM: <b id="con-ram-val" style="color:var(--tx)">—</b></span>
+            <div style="width:110px;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden">
+              <div id="con-ram-bar" style="height:100%;width:0%;background:var(--ac);transition:width .3s"></div>
+            </div>
+          </div>
+        </div>
+        <div id="con"></div>
+        <div class="row" style="margin-top:2px">
+          <input id="cm" placeholder="Escribe un comando (ej: say Hola, list, save-all, stop)" ${RL[me.role] < 1 ? 'disabled' : ''} autocomplete="off">
+          <button class="p" id="sd" ${RL[me.role] < 1 ? 'disabled' : ''}>Enviar comando</button>
+        </div>
+      </div>`;
+    
+    filterConsoleLogs();
+    stat();
+
+    // Eventos de consola
+    $('#con-search').oninput = (e) => {
+      consoleFilter = e.target.value.trim();
+      filterConsoleLogs();
+    };
+    $('#con-clear').onclick = () => {
+      $('#con').innerHTML = '';
+      toast('Vista de consola limpiada');
+    };
+    $('#con-autoscroll').onchange = (e) => {
+      consoleAutoScroll = e.target.checked;
+    };
+
+    const go = () => {
+      const i = $('#cm');
+      const val = i.value.trim();
+      if (val) {
+        cmdHistory.push(val);
+        if (cmdHistory.length > 50) cmdHistory.shift();
+        cmdHistoryIdx = cmdHistory.length;
+        api('cmd', 'POST', { cmd: val });
+        i.value = '';
+      }
+    };
+    $('#sd').onclick = go;
+    $('#cm').onkeydown = (e) => {
+      if (e.key === 'Enter') go();
+      if (e.key === 'ArrowUp') {
+        if (cmdHistory.length && cmdHistoryIdx > 0) {
+          cmdHistoryIdx--;
+          $('#cm').value = cmdHistory[cmdHistoryIdx] || '';
+        }
+      }
+      if (e.key === 'ArrowDown') {
+        if (cmdHistoryIdx < cmdHistory.length - 1) {
+          cmdHistoryIdx++;
+          $('#cm').value = cmdHistory[cmdHistoryIdx] || '';
+        } else {
+          cmdHistoryIdx = cmdHistory.length;
+          $('#cm').value = '';
+        }
+      }
+    };
+  }
+  if (t === 'servers') servers();
+  if (t === 'metrics') renderMetricsView();
+  if (t === 'backups') renderBackupsView();
+  if (t === 'security') renderSecurityView();
+  if (t === 'players') renderPlayersView();
+  if (t === 'props') {
+    const p = await api('props');
+    v.innerHTML = `<div class="grid">${Object.entries(p).map(([k, x]) => `<label>${esc(k)}${x === 'true' || x === 'false' ? `<select data-k="${esc(k)}"><option ${x === 'true' ? 'selected' : ''}>true</option><option ${x === 'false' ? 'selected' : ''}>false</option></select>` : `<input data-k="${esc(k)}" value="${esc(x)}">`}</label>`).join('')}</div><div class="row"><button class="p" id="sv">Guardar cambios</button><span class="mu">Los cambios se aplican al reiniciar el servidor.</span></div>`;
+    $('#sv').onclick = () => { const o = {}; v.querySelectorAll('[data-k]').forEach((i) => o[i.dataset.k] = i.value); api('props', 'PUT', o).then(() => toast('Propiedades guardadas')); };
+  }
+  if (t === 'files') files();
+  if (t === 'mods') mods();
+  if (t === 'users') users();
+  if (t === 'install') installer();
+}
+
+// Confirmación propia: siempre visible, sin depender de ventanas emergentes del navegador.
+function askServerRemoval(server) {
+  return new Promise(resolve => {
+    const dialog = document.createElement('dialog');
+    dialog.setAttribute('aria-label', 'Quitar o eliminar servidor');
+    dialog.style.cssText = 'color:var(--tx);background:#101427;border:1px solid var(--bd);border-radius:16px;padding:22px;width:min(480px,94vw);box-shadow:0 20px 80px #0009';
+    dialog.innerHTML = `
+      <div style="display:grid;gap:13px">
+        <h3 style="margin:0">¿Qué deseas hacer con el servidor?</h3>
+        <div class="mu" data-server-info style="font-size:13px;word-break:break-word"></div>
+        <button type="button" class="p" data-removal="only">Quitar del panel (conservar archivos)</button>
+        <p class="mu" style="font-size:12px;margin:0">Para borrar toda la carpeta, escribe el nombre exacto del servidor:</p>
+        <input data-confirm-name type="text" autocomplete="off" placeholder="Nombre del servidor" aria-label="Escribe el nombre para confirmar el borrado">
+        <button type="button" class="d" data-removal="delete" disabled>Eliminar servidor y todos sus archivos</button>
+        <button type="button" data-removal="cancel">Cancelar</button>
+      </div>`;
+    const info = dialog.querySelector('[data-server-info]');
+    info.textContent = `${server.name} — ${server.dir}`;
+    const entry = dialog.querySelector('[data-confirm-name]');
+    const erase = dialog.querySelector('[data-removal="delete"]');
+    entry.addEventListener('input', () => { erase.disabled = entry.value !== server.name; });
+    let finished = false;
+    const finish = result => {
+      if (finished) return;
+      finished = true;
+      if (dialog.open) dialog.close();
+      dialog.remove();
+      resolve(result);
+    };
+    dialog.querySelector('[data-removal="only"]').addEventListener('click', () => finish('remove-only'));
+    erase.addEventListener('click', () => { if (!erase.disabled) finish('delete-files'); });
+    dialog.querySelector('[data-removal="cancel"]').addEventListener('click', () => finish(null));
+    dialog.addEventListener('cancel', event => { event.preventDefault(); finish(null); });
+    document.body.appendChild(dialog);
+    if (typeof dialog.showModal === 'function') dialog.showModal();
+    else { dialog.setAttribute('open', ''); dialog.style.position = 'fixed'; dialog.style.zIndex = '99999'; dialog.style.top = '15vh'; dialog.style.left = 'calc(50% - 240px)'; }
+  });
+}
+
+
+async function servers() {
+  const data = await api('servers'), v = $('#v');
+  const activeSrv = data.servers.find(s => s.id === data.activeId) || data.servers[0];
+  
+  v.innerHTML = `<div>
+    <h2 style="margin:0 0 6px">Gestor de Servidores</h2>
+    <p class="mu" style="margin:0">Administra múltiples servidores y carpetas independientes. Puedes cambiar de servidor activo en cualquier momento.</p>
+  </div>
+
+  <div class="item" style="border:1px solid var(--ac);background:rgba(138,92,255,0.08);padding:14px;border-radius:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <div>
+      <span style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ac);font-weight:700">★ Servidor Activo Actual</span>
+      <h3 style="margin:4px 0 2px;font-size:16px">${esc(activeSrv?.name || 'Ninguno')}</h3>
+      <div class="mu" style="font-size:12px;word-break:break-all">📁 ${esc(activeSrv?.dir || 'Sin ruta')}</div>
+      <div class="mu" style="font-size:11px;margin-top:2px">Comando: <code>${esc(activeSrv?.startCommand || 'run.bat')}</code></div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="p" onclick="show('console')">Ir a Consola</button>
+      <button onclick="show('files')">Explorar Archivos</button>
+    </div>
+  </div>
+
+  <div>
+    <h3 style="margin:12px 0 8px">Servidores registrados (${data.servers.length})</h3>
+    <div class="list" id="srvList">
+      ${data.servers.map(s => `
+        <div class="item" style="justify-content:space-between;flex-wrap:wrap;gap:10px;border:1px solid ${s.active ? 'var(--ac)' : 'transparent'}">
+          <div style="flex:1;min-width:200px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <b>${esc(s.name)}</b>
+              ${s.active ? '<span style="font-size:10px;background:var(--ac);color:#10091f;padding:2px 6px;border-radius:6px;font-weight:700">ACTIVO</span>' : ''}
+              ${!s.exists ? '<span style="font-size:10px;background:rgba(240,86,106,0.2);color:var(--bad);padding:2px 6px;border-radius:6px">Carpeta no existe aún</span>' : ''}
+            </div>
+            <div class="mu" style="font-size:12px;margin-top:4px;word-break:break-all">📁 ${esc(s.dir)}</div>
+            <div class="mu" style="font-size:11px">Comando: <code>${esc(s.startCommand)}</code></div>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px">
+              <label style="display:flex;align-items:center;gap:7px;font-size:12px">RAM asignada (GB)
+                <input type="number" min="1" max="32" step="1" value="${Number(s.ramGb) || 4}" data-ram-input="${esc(s.id)}" style="width:86px;padding:7px" ${RL[me.role] < 2 ? 'disabled' : ''}>
+              </label>
+              ${RL[me.role] >= 2 ? `<button class="p" data-save-ram="${esc(s.id)}" ${s.active && S.status !== 'offline' ? 'disabled title="Apaga el servidor para cambiar la RAM"' : ''}>Guardar RAM</button>` : ''}
+              <span class="mu" style="font-size:11px">${s.active && S.status !== 'offline' ? 'Apaga el servidor para aplicar cambios.' : 'Se aplicará en el próximo arranque.'}</span>
+            </div>
+            <div style="display:grid;grid-template-columns:minmax(180px,1fr) auto auto;gap:8px;align-items:end;margin-top:10px;max-width:900px">
+              <label style="font-size:12px">Java personalizado (java.exe; vacío = Java del sistema)
+                <input type="text" data-java-input="${esc(s.id)}" value="${esc(s.javaPath || '')}" placeholder="C:\Program Files\Eclipse Adoptium\jdk-25\bin\java.exe" style="width:100%;padding:8px" ${RL[me.role] < 2 ? 'disabled' : ''}>
+              </label>
+              ${RL[me.role] >= 2 ? `<button type="button" data-pick-java="${esc(s.id)}" ${s.active && S.status !== 'offline' ? 'disabled title="Apaga el servidor para cambiar Java"' : ''}>📁 Explorar</button>` : ''}
+              ${RL[me.role] >= 2 ? `<button class="p" data-save-java="${esc(s.id)}" ${s.active && S.status !== 'offline' ? 'disabled title="Apaga el servidor para cambiar Java"' : ''}>Guardar Java</button>` : ''}
+            </div>
+            <div class="mu" style="font-size:11px">${s.javaPath ? 'Usará: ' + esc(s.javaPath) : 'Usará el Java configurado en Windows (PATH).'}</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            ${!s.active ? `<button class="p" data-switch="${esc(s.id)}" ${RL[me.role] < 1 ? 'disabled' : ''}>Usar este servidor</button>` : ''}
+            ${RL[me.role] >= 2 ? `<button data-edit="${esc(s.id)}" data-name="${esc(s.name)}" data-dir="${esc(s.dir)}" data-cmd="${esc(s.startCommand)}">Editar</button>` : ''}
+            ${RL[me.role] >= 2 ? `<button type="button" class="d" data-del="${esc(s.id)}" ${s.active && S.status !== 'offline' ? 'disabled title="Apaga el servidor antes de quitarlo"' : ''}>Quitar / eliminar servidor</button>` : ''}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  </div>
+
+  ${RL[me.role] >= 2 ? `
+  <div class="glass" style="padding:16px;display:grid;gap:10px">
+    <h3 style="margin:0">Registrar servidor existente</h3>
+    <p class="mu" style="margin:0;font-size:12.5px">Si tienes otra carpeta con un servidor de Minecraft en tu equipo, agrégala aquí.</p>
+    <div class="grid">
+      <label>Nombre del servidor<input id="nsName" placeholder="Ej: Survival Mods, Pruebas 1.21..."></label>
+      <label>Ruta completa de la carpeta
+        <div style="display:flex;gap:6px">
+          <input id="nsDir" placeholder="Ej: D:/MisServidores/Survival" style="width:100%">
+          <button type="button" id="nsDirBrowse" style="flex:none;padding:7px 11px;font-size:12px" title="Seleccionar carpeta de servidor">📁 Explorar</button>
+        </div>
+      </label>
+      <label>Comando de inicio<input id="nsCmd" value="run.bat nogui" placeholder="Ej: run.bat nogui"></label>
+    </div>
+    <div class="row">
+      <button class="p" id="nsAdd">Añadir a la lista</button>
+      <button onclick="show('install')">¿Quieres crear uno nuevo? Ir al Instalador</button>
+    </div>
+  </div>
+  ` : ''}`;
+
+  $('#srvList').onclick = async (e) => {
+    const javaBrowseBtn = e.target.closest('[data-pick-java]');
+    if (javaBrowseBtn) {
+      const sId = javaBrowseBtn.dataset.pickJava;
+      const selected = await pickSystemPath('file');
+      if (selected) {
+        const input = v.querySelector(`[data-java-input="${CSS.escape(sId)}"]`);
+        if (input) input.value = selected;
+        toast('Ruta seleccionada: ' + selected);
+      }
+      return;
+    }
+    const sw = e.target.closest('[data-switch]');
+    if (sw) return switchServer(sw.dataset.switch);
+    const ed = e.target.closest('[data-edit]');
+    if (ed) {
+      const nName = prompt('Nombre del servidor:', ed.dataset.name);
+      if (nName === null) return;
+      const nDir = prompt('Ruta de la carpeta:', ed.dataset.dir);
+      if (nDir === null) return;
+      const nCmd = prompt('Comando de arranque:', ed.dataset.cmd);
+      if (nCmd === null) return;
+      await api('servers/' + encodeURIComponent(ed.dataset.edit), 'PUT', { name: nName, dir: nDir, startCommand: nCmd });
+      toast('Servidor actualizado');
+      servers();
+      return;
+    }
+    const javaBtn = e.target.closest('[data-save-java]');
+    if (javaBtn) {
+      const id = javaBtn.dataset.saveJava;
+      const input = v.querySelector(`[data-java-input="${CSS.escape(id)}"]`);
+      const javaPath = input?.value.trim() || '';
+      try {
+        await api('servers/' + encodeURIComponent(id), 'PUT', { javaPath });
+        toast(javaPath ? 'Java guardado para este servidor.' : 'Se usará el Java del sistema.');
+        servers();
+      } catch (err) { toast(err.message || 'No se pudo guardar Java.'); }
+      return;
+    }
+    const ramBtn = e.target.closest('[data-save-ram]');
+    if (ramBtn) {
+      const id = ramBtn.dataset.saveRam;
+      const input = v.querySelector(`[data-ram-input="${CSS.escape(id)}"]`);
+      const ramGb = Number(input?.value);
+      if (!Number.isInteger(ramGb) || ramGb < 1 || ramGb > 32) return toast('La RAM debe ser un número entero entre 1 y 32 GB.');
+      try {
+        await api('servers/' + encodeURIComponent(id), 'PUT', { ramGb });
+        toast('RAM guardada: ' + ramGb + ' GB. Se aplicará al próximo arranque.');
+        servers();
+      } catch (err) { toast(err.message || 'No se pudo cambiar la RAM.'); }
+      return;
+    }
+    const del = e.target.closest('[data-del]');
+    if (del) {
+      // Un diálogo integrado evita que los bloqueadores de window.confirm oculten la acción.
+      const selectedServer = data.servers.find(x => x.id === del.dataset.del);
+      if (!selectedServer) return toast('No se encontró el servidor. Recarga la página.');
+      const action = await askServerRemoval(selectedServer);
+      if (!action) return;
+      del.disabled = true;
+      try {
+        const response = await fetch('/api/servers/' + encodeURIComponent(selectedServer.id), {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + T },
+          body: JSON.stringify({ deleteFiles: action === 'delete-files' })
+        });
+        const result = await response.json().catch(() => ({}));
+        if (response.status === 401) { logout(); return; }
+        if (!response.ok) throw new Error(result.error || `Error HTTP ${response.status}`);
+        toast(action === 'delete-files' ? 'Servidor y archivos eliminados.' : 'Servidor quitado del panel; sus archivos se conservaron.');
+        await servers();
+      } catch (err) {
+        del.disabled = false;
+        toast('No se pudo eliminar: ' + (err?.message || 'Error desconocido'));
+      }
+      return;
+    }
+  };
+
+  const browseImportBtn = $('#nsDirBrowse');
+  if (browseImportBtn) {
+    browseImportBtn.onclick = async () => {
+      const selected = await pickSystemPath('folder');
+      if (selected) {
+        $('#nsDir').value = selected;
+        if (!$('#nsName').value.trim()) {
+          const parts = selected.replace(/\\/g, '/').split('/').filter(Boolean);
+          if (parts.length) $('#nsName').value = parts[parts.length - 1];
+        }
+      }
+    };
+  }
+
+  const addBtn = $('#nsAdd');
+  if (addBtn) {
+    addBtn.onclick = async () => {
+      const name = $('#nsName').value.trim();
+      const dir = $('#nsDir').value.trim();
+      const startCommand = $('#nsCmd').value.trim();
+      if (!name) return toast('Escribe un nombre para el servidor.');
+      if (!dir) return toast('Indica la ruta de la carpeta.');
+      await api('servers', 'POST', { name, dir, startCommand });
+      toast('Servidor registrado con éxito');
+      servers();
+    };
+  }
+}
+
+async function switchServer(id) {
+  if (S.status && S.status !== 'offline') {
+    return toast('Debes detener el servidor antes de cambiar a otro.');
+  }
+  try {
+    const res = await api('servers/select', 'POST', { id });
+    toast('Servidor activo: ' + res.active.name);
+    dir = '';
+    if (cur === 'servers') servers();
+    if (cur === 'files') files();
+    if (cur === 'props') show('props');
+    if (cur === 'mods') mods();
+  } catch (e) {
+    renderQuickSrv();
+  }
+}
+
+function renderQuickSrv() {
+  const sel = $('#quickSrv');
+  if (!sel || !S.servers) return;
+  const activeId = S.activeServer?.id;
+  sel.innerHTML = S.servers.map(s => `<option value="${esc(s.id)}" ${s.id === activeId ? 'selected' : ''}>${esc(s.name)}</option>`).join('');
+  sel.onchange = (e) => switchServer(e.target.value);
+  sel.disabled = RL[me?.role || 'viewer'] < 1;
+}
+
+function onInstallProgress(m) {
+  const box = $('#instProgressBox'), bar = $('#ipb'), txt = $('#instStep'), err = $('#instErr'), btn = $('#ib');
+  if (!box) return;
+  box.hidden = false;
+  if (bar && m.progress != null) bar.style.width = Math.min(100, Math.max(0, m.progress)) + '%';
+  if (txt) txt.textContent = m.step || '';
+  if (err) {
+    if (m.error) {
+      err.textContent = 'Error: ' + m.error;
+      err.hidden = false;
+      if (bar) bar.style.background = 'var(--bad)';
+      if (btn) { btn.disabled = false; btn.textContent = 'Reintentar instalación'; }
+    } else {
+      err.hidden = true;
+      if (bar) bar.style.background = 'var(--ac)';
+    }
+  }
+  if (!m.installing && !m.error && m.progress === 100) {
+    if (bar) { bar.style.width = '100%'; bar.style.background = 'var(--ok)'; }
+    if (btn) { btn.disabled = false; btn.textContent = 'Instalar / Reinstalar servidor'; }
+    toast('¡Servidor instalado con éxito! Ya puedes iniciarlo.');
+  }
+}
+
+async function installer() {
+  const v = $('#v');
+  v.innerHTML = `<div>
+    <h2 style="margin:0 0 6px">Instalador de Servidor Minecraft</h2>
+    <p class="mu" style="margin:0">Descarga, configura e instala servidores de Minecraft desde cero automáticamente.</p>
+  </div>
+  <div id="instAlerts"></div>
+  <div id="installerModpacks" style="margin:16px 0;padding:16px;border:1px solid var(--bd);border-radius:14px;background:rgba(255,255,255,.025)"></div>
+  <div class="grid">
+    <label>Tipo de Servidor
+      <select id="it">
+        <option value="paper">Paper (Recomendado - Alto rendimiento y Plugins)</option>
+        <option value="purpur">Purpur (Paper optimizado con máxima configuración)</option>
+        <option value="fabric">Fabric (Mods ligeros y modernos)</option>
+        <option value="vanilla">Vanilla (Oficial de Mojang sin mods)</option>
+        <option value="forge">Forge (Gran catálogo de mods clásicos)</option>
+        <option value="neoforge">NeoForge (Mods modernos Forge 1.20.2+)</option>
+        <option value="spigot">Spigot (Servidor clásico con plugins)</option>
+        <option value="bukkit">CraftBukkit (Servidor clásico Bukkit)</option>
+      </select>
+    </label>
+    <label>Versión de Minecraft
+      <select id="iv"><option value="">Cargando versiones…</option></select>
+    </label>
+    <label>Memoria RAM asignada
+      <select id="ir">
+        <option value="2">2 GB RAM (Básico)</option>
+        <option value="4" selected>4 GB RAM (Recomendado estándar)</option>
+        <option value="6">6 GB RAM (Para más jugadores/mods)</option>
+        <option value="8">8 GB RAM (Servidores medianos/pesados)</option>
+        <option value="12">12 GB RAM (Modpacks grandes)</option>
+        <option value="16">16 GB RAM (Alto rendimiento)</option>
+      </select>
+    </label>
+    <label>Carpeta de instalación
+      <div style="display:flex;gap:6px">
+        <input id="idir" placeholder="Ruta de la carpeta del servidor" style="width:100%">
+        <button type="button" id="idirBrowse" style="flex:none;padding:7px 11px;font-size:12px" title="Seleccionar dónde instalar el servidor">📁 Explorar</button>
+      </div>
+    </label>
+  </div>
+  <div class="item" style="display:block;background:rgba(255,255,255,0.03);border:1px solid var(--bd);border-radius:12px;padding:14px">
+    <b>ℹ️ Guía sobre tipos de servidor y OptiFine:</b>
+    <ul style="margin:8px 0 0 18px;padding:0;color:var(--mu);font-size:12.5px;line-height:1.6">
+      <li><b>Paper:</b> Máximo rendimiento para servidores multijugador y soporte completo de plugins (Spigot/Bukkit).</li>
+      <li><b>Fabric / Forge / NeoForge:</b> Permiten cargar mods en el servidor (gestiónalos luego desde la pestaña <i>Mods</i>).</li>
+      <li><b>OptiFine:</b> Es una optimización del lado del cliente (jugador), no del servidor. Cualquier servidor aquí disponible funciona perfectamente con jugadores que usen OptiFine en su launcher.</li>
+      <li><b>BuildTools (Spigot / Bukkit):</b> Requiere que la máquina tenga Git instalado para compilar los JARs de Spigot/Bukkit. Para servidores de plugins recomendamos usar <b>Paper</b>, que descarga directo y es más rápido.</li>
+    </ul>
+  </div>
+  <div class="row">
+    <button class="p" id="ib">Instalar / Reinstalar servidor</button>
+    <span class="mu" id="iNote">El proceso descarga archivos oficiales y genera eula.txt y run.bat automáticamente.</span>
+  </div>
+  <div id="instProgressBox" class="glass" style="padding:16px;display:grid;gap:8px" hidden>
+    <div style="display:flex;justify-content:space-between;font-weight:600">
+      <span>Progreso de instalación:</span>
+      <span id="instStep" class="mu">Iniciando…</span>
+    </div>
+    <div style="background:#ffffff14;border-radius:8px;height:12px;overflow:hidden">
+      <div id="ipb" style="background:var(--ac);width:0%;height:100%;transition:width .3s"></div>
+    </div>
+    <div id="instErr" style="color:var(--bad);font-weight:600;font-size:13px" hidden></div>
+  </div>`;
+
+  const alertsEl = $('#instAlerts'), itEl = $('#it'), ivEl = $('#iv'), idirEl = $('#idir'), ibEl = $('#ib'), idirBrowseEl = $('#idirBrowse');
+  if (idirBrowseEl) {
+    idirBrowseEl.onclick = async () => {
+      const selected = await pickSystemPath('folder');
+      if (selected) {
+        idirEl.value = selected;
+        toast('Carpeta de instalación seleccionada');
+      }
+    };
+  }
+
+  try {
+    const st = await api('install/status');
+    idirEl.value = st.serverDir || '';
+    if (!st.javaFound) {
+      alertsEl.innerHTML += `<div class="item" style="background:rgba(240,86,106,0.15);border:1px solid var(--bad);color:var(--tx);margin-bottom:12px">
+        <span>⚠️ <b>Java no detectado:</b> No se encontró 'java' en el PATH del sistema. Para que el servidor arranque tras instalarlo, asegúrate de tener instalado Java en tu PC.</span>
+      </div>`;
+    }
+    if (st.installed) {
+      alertsEl.innerHTML += `<div class="item" style="background:rgba(245,185,74,0.12);border:1px solid var(--warn);color:var(--tx);margin-bottom:12px">
+        <span>⚠️ <b>Servidor existente detectado:</b> Ya existe un servidor en esta carpeta. Si reinstalas, se actualizarán los ejecutables principales y el archivo de arranque (run.bat).</span>
+      </div>`;
+    }
+  } catch {}
+
+  const loadVersions = async () => {
+    const type = itEl.value;
+    ivEl.innerHTML = '<option value="">Cargando versiones…</option>';
+    ivEl.disabled = true;
+    try {
+      const data = await api('install/versions?type=' + encodeURIComponent(type));
+      if (!data.versions || !data.versions.length) {
+        ivEl.innerHTML = '<option value="">No hay versiones disponibles</option>';
+      } else {
+        ivEl.innerHTML = data.versions.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join('');
+      }
+    } catch {
+      ivEl.innerHTML = '<option value="">Error al cargar versiones</option>';
+    } finally {
+      ivEl.disabled = false;
+    }
+  };
+
+  itEl.onchange = loadVersions;
+  await loadVersions();
+
+  try {
+    const curProg = await api('install/progress');
+    if (curProg && (curProg.installing || curProg.step)) {
+      onInstallProgress(curProg);
+    }
+  } catch {}
+
+  ibEl.onclick = async () => {
+    if (S.status && S.status !== 'offline') {
+      return toast('Debes detener el servidor antes de instalar o reinstalar.');
+    }
+    const type = itEl.value, version = ivEl.value, ram = $('#ir').value, sDir = idirEl.value.trim();
+    if (!version) return toast('Selecciona una versión de Minecraft válida.');
+    if (!confirm('¿Deseas instalar ' + type.toUpperCase() + ' ' + version + ' con ' + ram + ' GB de RAM?\\nCarpeta: ' + (sDir || 'configurada') + '\\n\\nSe descargarán los archivos necesarios y se configurará el servidor.')) return;
+    ibEl.disabled = true;
+    ibEl.textContent = 'Instalando servidor…';
+    $('#instErr').hidden = true;
+    $('#instStep').textContent = 'Conectando y preparando descarga…';
+    $('#ipb').style.width = '5%';
+    $('#ipb').style.background = 'var(--ac)';
+    $('#instProgressBox').hidden = false;
+    try {
+      await api('install/run', 'POST', { type, version, ram, serverDir: sDir });
+      toast('Instalación iniciada. Observa el progreso aquí.');
+    } catch (e) {
+      ibEl.disabled = false;
+      ibEl.textContent = 'Instalar / Reinstalar servidor';
+    }
+  };
+  await modpacks(true);
+}
+
+async function mods() {
+  const v = $('#v');
+  v.innerHTML = `
+    <div>
+      <h2 style="margin:0 0 4px;display:flex;align-items:center;gap:8px">
+        <span>🧩</span> Gestor Avanzado de Mods y Plugins
+      </h2>
+      <p class="mu" style="margin:0">Descarga, activa/desactiva y detecta archivos duplicados para mantener tu servidor estable.</p>
+    </div>
+
+    <!-- Pestañas de selector Mods / Plugins -->
+    <div style="display:flex;gap:8px;margin-top:6px">
+      <button class="p" id="addon-tab-mods">📂 Mods del Servidor</button>
+      <button id="addon-tab-plugins">🔌 Plugins de Servidor</button>
+      <button id="addon-tab-search">🔍 Buscar en Modrinth</button>
+    </div>
+
+    <!-- Alertas de Duplicados -->
+    <div id="addon-dups-box" hidden style="margin-top:12px;padding:12px 16px;background:rgba(245,185,74,0.12);border:1px solid var(--warn);border-radius:12px">
+      <b style="color:var(--warn)">⚠️ Archivos duplicados detectados:</b>
+      <div id="addon-dups-list" style="margin-top:6px;font-size:12px"></div>
+    </div>
+
+    <!-- SECCIÓN 1: LISTADO LOCAL DE MODS Y PLUGINS -->
+    <div id="addon-installed-sec" style="margin-top:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <h3 style="margin:0" id="addon-sec-title">Mods instalados</h3>
+        <span class="mu" style="font-size:12px" id="addon-sec-count"></span>
+      </div>
+      <div class="list" id="addon-list-container">
+        <p class="mu">Cargando complementos…</p>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 2: BUSCADOR EN MODRINTH (OCULTO POR DEFECTO) -->
+    <div id="addon-search-sec" hidden style="margin-top:14px">
+      <div class="grid">
+        <label>Buscar complemento<input id="mq" placeholder="Ej. Sodium, WorldEdit, Essentials, Create" maxlength="100"></label>
+        <label>Versión de Minecraft<input id="mv" placeholder="Ej. 1.20.1"></label>
+        <label>Tipo / Cargador
+          <select id="ml">
+            <option value="paper">Plugin (Paper / Spigot / Purpur)</option>
+            <option value="fabric">Fabric</option>
+            <option value="forge">Forge</option>
+            <option value="neoforge">NeoForge</option>
+            <option value="quilt">Quilt</option>
+          </select>
+        </label>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <button class="p" id="ms">Buscar en Modrinth</button>
+        <span class="mu">Descarga directa verificada a la carpeta de tu servidor.</span>
+      </div>
+      <div id="mr" class="list" style="margin-top:12px">
+        <p class="mu">Escribe un término de búsqueda para ver complementos oficiales.</p>
+      </div>
+    </div>
+  `;
+
+  let currentAddonView = 'mods'; // 'mods' | 'plugins' | 'search'
+
+  const refreshAddonsList = async () => {
+    try {
+      const st = await api('addons/status');
+      const dupsBox = $('#addon-dups-box');
+      const dupsList = $('#addon-dups-list');
+      const allDups = [...st.pluginDuplicates, ...st.modDuplicates];
+      if (allDups.length > 0) {
+        dupsBox.hidden = false;
+        dupsList.innerHTML = allDups.map(d => '<div>• Se detectaron versiones simultáneas: <b>' + esc(d.original) + '</b> y <b>' + esc(d.duplicate) + '</b>. Te recomendamos desactivar o borrar la versión más antigua.</div>').join('');
+      } else {
+        dupsBox.hidden = true;
+      }
+
+      const items = currentAddonView === 'plugins' ? st.plugins : st.mods;
+      $('#addon-sec-title').textContent = currentAddonView === 'plugins' ? '🔌 Plugins instalados (carpeta plugins)' : '🧩 Mods instalados (carpeta mods)';
+      $('#addon-sec-count').textContent = '(' + items.length + ' archivos)';
+
+      const container = $('#addon-list-container');
+      if (!items.length) {
+        container.innerHTML = '<p class="mu">No hay archivos en la carpeta ' + (currentAddonView === 'plugins' ? 'plugins' : 'mods') + '.</p>';
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <div class="item" style="justify-content:space-between;flex-wrap:wrap;gap:8px;border-left:4px solid ${item.enabled ? 'var(--ac)' : 'var(--mu)'}">
+          <div style="flex:1;min-width:200px">
+            <div style="display:flex;align-items:center;gap:8px">
+              <b>${esc(item.filename)}</b>
+              <span style="font-size:10px;padding:2px 6px;border-radius:6px;font-weight:700;background:${item.enabled ? 'rgba(77,163,255,0.15)' : 'rgba(255,255,255,0.08)'};color:${item.enabled ? 'var(--ok)' : 'var(--mu)'}">
+                ${item.enabled ? 'ACTIVO (.jar)' : 'DESACTIVADO (.disabled)'}
+              </span>
+            </div>
+            <div class="mu" style="font-size:11.5px;margin-top:2px">
+              Tamaño: ${(item.size / 1024 / 1024).toFixed(2)} MB
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <button class="p" data-toggle-addon="${esc(item.filename)}" data-addon-type="${item.type}" data-next-state="${!item.enabled}" style="font-size:11.5px;padding:5px 10px">
+              ${item.enabled ? 'Desactivar' : 'Activar'}
+            </button>
+            <button class="d" data-del-addon="${esc(item.filename)}" data-addon-type="${item.type}" style="font-size:11.5px;padding:5px 10px">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      container.querySelectorAll('[data-toggle-addon]').forEach(btn => {
+        btn.onclick = async () => {
+          const fn = btn.dataset.toggleAddon;
+          const type = btn.dataset.addonType;
+          const enable = btn.dataset.nextState === 'true';
+          try {
+            await api('addons/toggle', 'POST', { type, filename: fn, enable });
+            toast(enable ? 'Complemento activado' : 'Complemento desactivado');
+            refreshAddonsList();
+          } catch (e) {
+            toast('Error: ' + (e.message || 'no se pudo cambiar estado'));
+          }
+        };
+      });
+
+      container.querySelectorAll('[data-del-addon]').forEach(btn => {
+        btn.onclick = async () => {
+          const fn = btn.dataset.delAddon;
+          const type = btn.dataset.addonType;
+          if (!confirm('¿Eliminar permanentemente «' + fn + '»?')) return;
+          try {
+            if (type === 'plugin') {
+              await api('file-op', 'POST', { action: 'delete', path: 'plugins/' + fn });
+            } else {
+              await api('mods/' + encodeURIComponent(fn), 'DELETE');
+            }
+            toast('Complemento eliminado');
+            refreshAddonsList();
+          } catch (e) {
+            toast('Error al eliminar: ' + (e.message || 'error'));
+          }
+        };
+      });
+    } catch {}
+  };
+
+  // Pestañas
+  $('#addon-tab-mods').onclick = () => {
+    currentAddonView = 'mods';
+    $('#addon-tab-mods').className = 'p';
+    $('#addon-tab-plugins').className = '';
+    $('#addon-tab-search').className = '';
+    $('#addon-installed-sec').hidden = false;
+    $('#addon-search-sec').hidden = true;
+    refreshAddonsList();
+  };
+  $('#addon-tab-plugins').onclick = () => {
+    currentAddonView = 'plugins';
+    $('#addon-tab-plugins').className = 'p';
+    $('#addon-tab-mods').className = '';
+    $('#addon-tab-search').className = '';
+    $('#addon-installed-sec').hidden = false;
+    $('#addon-search-sec').hidden = true;
+    refreshAddonsList();
+  };
+  $('#addon-tab-search').onclick = () => {
+    currentAddonView = 'search';
+    $('#addon-tab-search').className = 'p';
+    $('#addon-tab-mods').className = '';
+    $('#addon-tab-plugins').className = '';
+    $('#addon-installed-sec').hidden = true;
+    $('#addon-search-sec').hidden = false;
+  };
+
+  // Búsqueda en Modrinth
+  const searchModrinth = async () => {
+    const q = $('#mq').value.trim();
+    if (!q) return toast('Escribe el nombre de un complemento.');
+    $('#mr').innerHTML = '<p class="mu">Buscando en Modrinth…</p>';
+    try {
+      const loader = $('#ml').value;
+      const gameVersion = $('#mv').value.trim();
+      const data = await api('mods/search?q=' + encodeURIComponent(q) + '&loader=' + encodeURIComponent(loader) + '&gameVersion=' + encodeURIComponent(gameVersion));
+      $('#mr').innerHTML = data.hits.length ? data.hits.map(h => `
+        <div class="item" style="align-items:flex-start">
+          ${h.icon ? `<img src="${esc(h.icon)}" alt="" width="42" height="42" style="border-radius:9px;object-fit:cover" referrerpolicy="no-referrer">` : ''}
+          <div class="n">
+            <b>${esc(h.title)}</b>
+            <div class="mu" style="font-size:12px;margin-top:4px">${esc(h.description || '')}</div>
+            <div class="mu" style="font-size:11px;margin-top:4px">${Number(h.downloads || 0).toLocaleString()} descargas · ${esc((h.categories || []).join(', '))}</div>
+          </div>
+          <button data-modrinth-versions="${esc(h.id)}" data-modrinth-title="${esc(h.title)}">Ver versiones</button>
+        </div>
+      `).join('') : '<p class="mu">No se encontraron resultados.</p>';
+    } catch {
+      $('#mr').innerHTML = '<p class="mu">Error al buscar en Modrinth.</p>';
+    }
+  };
+
+  $('#ms').onclick = searchModrinth;
+  $('#mq').onkeydown = e => { if (e.key === 'Enter') searchModrinth(); };
+
+  $('#mr').onclick = async e => {
+    const vb = e.target.closest('[data-modrinth-versions]');
+    if (vb) {
+      const pid = vb.dataset.modrinthVersions;
+      const title = vb.dataset.modrinthTitle;
+      vb.disabled = true;
+      vb.textContent = 'Cargando…';
+      try {
+        const data = await api('mods/versions?project=' + encodeURIComponent(pid) + '&loader=' + encodeURIComponent($('#ml').value) + '&gameVersion=' + encodeURIComponent($('#mv').value.trim()));
+        const panel = document.createElement('div');
+        panel.className = 'item';
+        panel.style.display = 'block';
+        panel.innerHTML = `<b>${esc(title)} — versiones disponibles</b>
+          <div class="list" style="margin-top:8px">
+            ${data.versions.length ? data.versions.map(ver => `
+              <div class="item">
+                <div class="n">
+                  <b>${esc(ver.name || ver.version)}</b>
+                  <div class="mu" style="font-size:11px">${esc(ver.version)} · MC: ${esc((ver.gameVersions || []).join(', '))} · ${esc((ver.loaders || []).join(', '))}</div>
+                </div>
+                <button class="p" data-modrinth-install="${esc(ver.id)}">Instalar</button>
+              </div>
+            `).join('') : '<p class="mu">No hay versiones compatibles.</p>'}
+          </div>`;
+        vb.closest('.item').insertAdjacentElement('afterend', panel);
+      } catch {
+        toast('No se pudieron cargar versiones.');
+      } finally {
+        vb.disabled = false;
+        vb.textContent = 'Ver versiones';
+      }
+      return;
+    }
+
+    const ib = e.target.closest('[data-modrinth-install]');
+    if (ib) {
+      if (!confirm('¿Descargar e instalar en tu servidor?')) return;
+      ib.disabled = true;
+      ib.textContent = 'Instalando…';
+      try {
+        const result = await api('mods/install', 'POST', { versionId: ib.dataset.modrinthInstall, loader: $('#ml').value, gameVersion: $('#mv').value.trim() });
+        toast('Instalado: ' + result.filename);
+        ib.textContent = 'Instalado ✓';
+      } catch (err) {
+        ib.disabled = false;
+        ib.textContent = 'Instalar';
+      }
+    }
+  };
+
+  await refreshAddonsList();
+}
+
+let modpackProgressTimer = null;
+async function refreshModpackProgress() {
+  try {
+    const p = await api('modpacks/progress');
+    const box = $('#mpProgressBox'); if (!box) return;
+    box.hidden = false;
+    const pct = Math.max(0, Math.min(100, Number(p.progress) || 0));
+    $('#mpProgressBar').style.width = pct + '%'; $('#mpProgressPct').textContent = pct + '%';
+    $('#mpProgressStep').textContent = p.step || '';
+    $('#mpProgressTitle').textContent = p.installing ? 'Instalando modpack…' : (p.error ? 'La instalación falló' : (pct === 100 ? 'Modpack instalado' : 'Progreso de instalación'));
+    $('#mpProgressBar').style.background = p.error ? 'var(--bad)' : (pct === 100 ? 'var(--ok)' : 'var(--ac)');
+    const err = $('#mpProgressErr'); if (p.error) { err.textContent = 'Error: ' + p.error; err.hidden = false; } else err.hidden = true;
+    if (!p.installing && modpackProgressTimer) { clearInterval(modpackProgressTimer); modpackProgressTimer = null; }
+  } catch {}
+}
+
+async function modpacks(insideInstaller = false) {
+  const v = insideInstaller ? $('#installerModpacks') : $('#v');
+  v.innerHTML = `<div><h3 style="margin:0 0 6px">Instalar un modpack</h3><p class="mu" style="margin:0">Busca modpacks en Modrinth e instálalos automáticamente. Detectamos la versión de Minecraft y el cargador exacto (Forge, NeoForge, Fabric o Quilt), configuramos el arranque y asignamos la RAM seleccionada abajo. El servidor debe estar apagado.</p></div>
+  <div class="grid"><label>Buscar modpack<input id="mpq" placeholder="Ej. Create: Astral, Better Minecraft" maxlength="100"></label><label>Versión de Minecraft (opcional)<input id="mpv" placeholder="Ej. 1.20.1"></label></div>
+  <div class="row"><button class="p" id="mps">Buscar modpacks</button><span class="mu">Fuente: Modrinth · solo paquetes .mrpack.</span></div><div id="mpProgressBox" class="item" hidden style="display:block"><div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><b id="mpProgressTitle">Instalando modpack…</b><b id="mpProgressPct">0%</b></div><div style="height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin:10px 0"><div id="mpProgressBar" style="height:100%;width:0%;background:var(--ac);border-radius:99px;transition:width .25s ease"></div></div><p id="mpProgressStep" class="mu" style="margin:0">Preparando instalación…</p><p id="mpProgressErr" hidden style="color:var(--bad);margin:8px 0 0"></p></div><div id="mpr" class="list"><p class="mu">Escribe un nombre y pulsa Buscar modpacks.</p></div>
+  <div><h3>Instalación automática</h3><p class="mu">Haz una copia de seguridad antes de continuar. El instalador lee la versión exacta de Minecraft y del cargador en el manifiesto, instala Forge/Fabric/NeoForge/Quilt cuando está declarado y configura <code>run.bat</code> con la RAM elegida. Si el manifiesto es ambiguo o no declara un cargador, mostrará un error en vez de adivinar.</p></div>
+  <details style="margin-top:14px;padding:14px 16px;border:1px solid var(--bd);border-radius:12px;background:rgba(255,255,255,.035)">
+    <summary style="cursor:pointer;font-weight:700">📘 Tutorial: instalar un modpack paso a paso</summary>
+    <div class="mu" style="font-size:13px;line-height:1.75;margin-top:10px">
+      <ol style="padding-left:20px;margin:0">
+        <li><b>Haz una copia de seguridad.</b> Guarda el mundo y la carpeta completa del servidor antes de cambiar nada.</li>
+        <li><b>Detén el servidor.</b> No instales ni reemplaces archivos mientras Minecraft esté ejecutándose.</li>
+        <li><b>Busca el modpack.</b> Escribe su nombre en el buscador. Si quieres una versión concreta de Minecraft, introdúcela en el filtro opcional.</li>
+        <li><b>Elige una versión.</b> Pulsa <i>Ver versiones</i> y revisa la versión de Minecraft y el cargador indicado (Fabric, Forge, NeoForge o Quilt).</li>
+        <li><b>Pulsa Instalar.</b> La barra de progreso mostrará el avance. Mantén el panel abierto y espera a que termine; no cierres la ventana ni apagues el equipo durante la instalación.</li>
+        <li><b>Revisa el resultado.</b> Si aparece un error, lee el mensaje, comprueba la conexión y el espacio disponible, y revisa los registros antes de volver a intentarlo.</li>
+        <li><b>Inicia el servidor y prueba.</b> Acepta el EULA de Minecraft si se te solicita. La primera carga puede tardar más de lo normal.</li>
+        <li><b>Configura los jugadores.</b> Quienes entren deben usar una versión compatible del modpack en el cliente; los mods que solo son de cliente no sustituyen los mods requeridos por el servidor.</li>
+      </ol>
+      <p style="margin:10px 0 0"><b>Consejos:</b> deja suficiente RAM libre para Windows y otros programas; no asignes toda la memoria del equipo a Minecraft. Algunos modpacks dependen de archivos externos que pueden no estar disponibles. No borres los archivos anteriores hasta verificar que el mundo y el servidor funcionan correctamente.</p>
+    </div>
+  </details>`;
+  const search = async () => {
+    const q = $('#mpq').value.trim(); if (!q) return toast('Escribe el nombre de un modpack.');
+    $('#mpr').innerHTML = '<p class="mu">Buscando modpacks en Modrinth…</p>';
+    try {
+      const data = await api('modpacks/search?q=' + encodeURIComponent(q) + '&gameVersion=' + encodeURIComponent($('#mpv').value.trim()));
+      $('#mpr').innerHTML = data.hits.length ? data.hits.map(h => `<div class="item" style="align-items:flex-start">${h.icon ? `<img src="${esc(h.icon)}" alt="" width="46" height="46" style="border-radius:10px;object-fit:cover" referrerpolicy="no-referrer">` : ''}<div class="n"><b>${esc(h.title)}</b><div class="mu" style="font-size:12px;margin-top:4px">${esc(h.description || '')}</div><div class="mu" style="font-size:11px;margin-top:4px">${Number(h.downloads || 0).toLocaleString()} descargas</div></div><button data-mpversions="${esc(h.id)}" data-mptitle="${esc(h.title)}">Ver versiones</button></div>`).join('') : '<p class="mu">No se encontraron modpacks. Prueba otro nombre o quita el filtro de versión.</p>';
+    } catch { $('#mpr').innerHTML = '<p class="mu">No se pudo completar la búsqueda. Comprueba la conexión con Modrinth.</p>'; }
+  };
+  $('#mps').onclick = search; $('#mpq').onkeydown = e => { if (e.key === 'Enter') search(); };
+  $('#mpr').onclick = async e => {
+    const vb = e.target.closest('[data-mpversions]');
+    if (vb) {
+      const id = vb.dataset.mpversions, title = vb.dataset.mptitle;
+      const old = document.getElementById('mpversions-' + id); if (old) { old.remove(); return; }
+      vb.disabled = true; vb.textContent = 'Cargando…';
+      const loading = document.createElement('p'); loading.className = 'mu'; loading.textContent = 'Cargando versiones…'; vb.closest('.item').insertAdjacentElement('afterend', loading);
+      try {
+        const data = await api('modpacks/versions?project=' + encodeURIComponent(id) + '&gameVersion=' + encodeURIComponent($('#mpv').value.trim()));
+        const panel = document.createElement('div'); panel.className = 'item'; panel.id = 'mpversions-' + id; panel.style.display = 'block';
+        panel.innerHTML = `<b>${esc(title)} — versiones disponibles</b><div class="list" style="margin-top:8px">${data.versions.length ? data.versions.map(ver => `<div class="item"><div class="n"><b>${esc(ver.name || ver.version)}</b><div class="mu" style="font-size:11px">${esc(ver.version)} · Minecraft: ${esc((ver.gameVersions || []).join(', '))} · ${esc((ver.loaders || []).join(', '))} · ${(ver.files || []).map(f => esc(f.filename)).join(', ')}</div></div><button class="p" data-mpinstall="${esc(ver.id)}" data-mpname="${esc(title)}">Instalar</button></div>`).join('') : '<p class="mu">No hay versiones para esa versión de Minecraft.</p>'}</div>`;
+        loading.replaceWith(panel);
+      } catch { loading.textContent = 'No se pudieron cargar las versiones. Revisa la conexión con Modrinth.'; }
+      finally { vb.disabled = false; vb.textContent = 'Ver versiones'; }
+      return;
+    }
+    const b = e.target.closest('[data-mpinstall]'); if (!b) return;
+    if (!confirm('¿Instalar el modpack «' + b.dataset.mpname + '» en el servidor activo? Se instalará automáticamente el cargador y la versión declarados por el modpack y se configurará el arranque. El servidor debe estar apagado. Haz una copia de seguridad antes de continuar.')) return;
+    b.disabled = true; b.textContent = 'Instalando…';
+    const progressBox = $('#mpProgressBox'); if (progressBox) { progressBox.hidden = false; $('#mpProgressBar').style.width = '1%'; $('#mpProgressPct').textContent = '1%'; $('#mpProgressStep').textContent = 'Iniciando instalación…'; $('#mpProgressErr').hidden = true; }
+    if (modpackProgressTimer) clearInterval(modpackProgressTimer);
+    await refreshModpackProgress(); modpackProgressTimer = setInterval(refreshModpackProgress, 700);
+    try {
+      const result = await api('modpacks/install', 'POST', { versionId: b.dataset.mpinstall, ram: $('#ir')?.value || '4' });
+      await refreshModpackProgress();
+      const loaderInfo = result.loaders && result.loaders.length ? ' Cargador detectado en el manifiesto: ' + result.loaders.join(', ') + '.' : '';
+      toast('Modpack instalado: Minecraft ' + (result.minecraft || '?') + ' · ' + result.loader + ' ' + result.loaderVersion + ' · ' + result.ram + ' GB RAM. Archivos nuevos: ' + result.installed + '.' + (result.skipped ? ' Omitidos por existir: ' + result.skipped + '.' : '') + (result.external ? ' Archivos externos no descargados: ' + result.external + '.' : ''));
+      b.textContent = 'Instalado';
+      const note = document.createElement('p'); note.className = 'mu'; note.textContent = 'Instalación terminada. Minecraft: ' + (result.minecraft || 'ver manifiesto') + '.' + loaderInfo + ' Revisa el cargador y el comando de inicio antes de arrancar.'; b.closest('.item').insertAdjacentElement('afterend', note);
+    } catch { b.disabled = false; b.textContent = 'Reintentar'; }
+  };
+}
+
+let fileClipboard = null; // {path, mode: 'copy'|'move'}
+let fileSortAlpha = false;
+let selectedFilePath = null;
+async function files() {
+  const l = await api('files?path=' + encodeURIComponent(dir)), v = $('#v');
+  const entries = [...l];
+  if (fileSortAlpha) entries.sort((a,b) => a.name.localeCompare(b.name, undefined, {sensitivity:'base', numeric:true}));
+  else entries.sort((a,b) => Number(b.dir)-Number(a.dir) || a.name.localeCompare(b.name, undefined, {sensitivity:'base', numeric:true}));
+  const selectedName = selectedFilePath && selectedFilePath.startsWith(dir ? dir + '/' : '') ? selectedFilePath.slice((dir ? dir + '/' : '').length) : '';
+  v.innerHTML = `<div class="row"><b>/${esc(dir)}</b>${dir ? '<button id="up2">Carpeta superior</button>' : ''}<span id="pg" class="mu"></span><button class="p" id="upb" style="margin-left:auto">Subir archivos</button><input type="file" id="fi" multiple hidden></div>
+  <div class="filetools"><button id="frn" disabled>Cambiar nombre</button><button id="fcp" disabled>Copiar</button><button id="fct" disabled>Cortar</button><button id="fpa" ${fileClipboard ? '' : 'disabled'}>Pegar</button><button id="fdel" class="d" disabled>Borrar</button><button id="fsort">${fileSortAlpha ? 'Orden: alfabético ✓' : 'Ordenar alfabéticamente'}</button><span class="filehint" id="fsel">Selecciona un archivo o carpeta</span></div>
+  <div class="list" id="flist">${entries.map((f) => { const full=(dir ? dir+'/' : '')+f.name; return `<div class="item f ${full===selectedFilePath?'sel':''}" data-n="${esc(f.name)}" data-p="${esc(full)}" data-d="${f.dir}" title="Un clic selecciona; doble clic abre"><span class="n">${f.dir ? '📁 ' : '📄 '}${esc(f.name)}</span><span class="mu">${f.dir ? 'Carpeta' : (f.size / 1024).toFixed(1) + ' KB'}</span></div>`; }).join('')}</div>`;
+  if (dir) $('#up2').onclick = () => { dir = dir.split('/').slice(0, -1).join('/'); selectedFilePath=null; files(); };
+  listed = new Set(l.map((f) => f.name));
+  $('#upb').onclick = () => $('#fi').click();
+  $('#fi').onchange = (e) => { upload(e.target.files); e.target.value = ''; };
+  const updateTools = () => {
+    const has = !!selectedFilePath && entries.some(f => (dir ? dir+'/' : '')+f.name === selectedFilePath);
+    ['frn','fcp','fct','fdel'].forEach(id => $('#'+id).disabled = !has);
+    $('#fpa').disabled = !fileClipboard;
+    $('#fsel').textContent = has ? 'Seleccionado: ' + selectedFilePath.split('/').pop() : 'Selecciona un archivo o carpeta';
+  };
+  updateTools();
+  $('#fsort').onclick = () => { fileSortAlpha = !fileSortAlpha; files(); };
+  $('#flist').onclick = (e) => {
+    const i=e.target.closest('.f'); if(!i) return;
+    selectedFilePath=i.dataset.p;
+    $('#flist').querySelectorAll('.f').forEach(x=>x.classList.toggle('sel',x===i));
+    updateTools();
+  };
+    $('#flist').ondblclick = async (e) => {
+    const i = e.target.closest('.f'); if (!i) return;
+    const p = i.dataset.p;
+    if (i.dataset.d === 'true') { dir = p; selectedFilePath = null; return files(); }
+    try {
+      const f = await api('file?path=' + encodeURIComponent(p));
+      let initialContent = f.text;
+      
+      v.innerHTML = `
+        <div style="display:flex;flex-direction:column;flex:1;min-height:0;gap:8px">
+          <div class="console-toolbar" style="padding:6px 12px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <b>📄 ${esc(p)}</b>
+              <span id="ed-changed" class="mu" style="font-size:11px;color:var(--ok)">✓ Sin cambios</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <input id="ed-search" placeholder="🔍 Buscar texto en archivo…" style="width:190px;padding:3px 8px;font-size:11px">
+              <button class="p" id="fs" style="padding:4px 12px;font-size:12px">💾 Guardar archivo</button>
+              <button id="fc" style="padding:4px 10px;font-size:12px">Cerrar</button>
+            </div>
+          </div>
+          <textarea id="ed" spellcheck="false" style="flex:1;min-height:480px;background:#050906;border:1px solid var(--bd);border-radius:12px;padding:12px;font:12.5px/1.6 'JetBrains Mono',Consolas,monospace;color:var(--tx);resize:none"></textarea>
+        </div>
+      `;
+
+      const ed = $('#ed');
+      ed.value = initialContent;
+
+      ed.oninput = () => {
+        const hasChanges = ed.value !== initialContent;
+        const tag = $('#ed-changed');
+        if (tag) {
+          tag.textContent = hasChanges ? '● Cambios sin guardar' : '✓ Sin cambios';
+          tag.style.color = hasChanges ? 'var(--warn)' : 'var(--ok)';
+        }
+      };
+
+      $('#ed-search').onkeydown = (ev) => {
+        if (ev.key === 'Enter') {
+          const query = ev.target.value;
+          if (!query) return;
+          const idx = ed.value.indexOf(query, ed.selectionEnd || 0);
+          if (idx !== -1) {
+            ed.focus();
+            ed.setSelectionRange(idx, idx + query.length);
+          } else {
+            const wrapIdx = ed.value.indexOf(query, 0);
+            if (wrapIdx !== -1) {
+              ed.focus();
+              ed.setSelectionRange(wrapIdx, wrapIdx + query.length);
+            } else {
+              toast('No se encontró: ' + query);
+            }
+          }
+        }
+      };
+
+      $('#fs').onclick = async () => {
+        if (!confirm('¿Confirmas guardar y sobreescribir los cambios en «' + p + '»?')) return;
+        try {
+          await api('file', 'PUT', { path: p, text: ed.value });
+          initialContent = ed.value;
+          const tag = $('#ed-changed');
+          if (tag) { tag.textContent = '✓ Guardado exitosamente'; tag.style.color = 'var(--ok)'; }
+          toast('Archivo «' + p + '» guardado correctamente.');
+        } catch (err) {
+          toast('Error al guardar: ' + err.message);
+        }
+      };
+
+      $('#fc').onclick = () => {
+        if (ed.value !== initialContent) {
+          if (!confirm('Tienes cambios sin guardar. ¿Cerrar de todos modos y descartar?')) return;
+        }
+        files();
+      };
+    } catch(err) { toast('No se pudo abrir: ' + err.message); }
+  };
+  $('#frn').onclick = async () => {
+    if(!selectedFilePath)return;
+    const old=selectedFilePath.split('/').pop(), name=prompt('Nuevo nombre:',old);
+    if(name===null)return;
+    try { await api('file-op','POST',{action:'rename',path:selectedFilePath,name}); selectedFilePath=(dir?dir+'/':'')+name.trim(); toast('Nombre cambiado'); files(); }
+    catch(err){toast(err && err.message ? err.message : 'No se pudo completar la operación. Revisa el mensaje anterior.');}
+  };
+  $('#fcp').onclick=()=>{if(selectedFilePath){fileClipboard={path:selectedFilePath,mode:'copy'};updateTools();toast('Copiado. Ve a la carpeta de destino y pulsa Pegar.');}};
+  $('#fct').onclick=()=>{if(selectedFilePath){fileClipboard={path:selectedFilePath,mode:'move'};updateTools();toast('Cortado. Ve a la carpeta de destino y pulsa Pegar.');}};
+  $('#fpa').onclick=async()=>{
+    if(!fileClipboard)return;
+    try { await api('file-op','POST',{action:fileClipboard.mode,path:fileClipboard.path,targetDir:dir}); toast(fileClipboard.mode==='copy'?'Elemento copiado':'Elemento movido'); if(fileClipboard.mode==='move')fileClipboard=null; selectedFilePath=null; files(); }
+    catch(err){toast(err && err.message ? err.message : 'No se pudo completar la operación. Revisa el mensaje anterior.');}
+  };
+  $('#fdel').onclick=async()=>{
+    if(!selectedFilePath)return;
+    const name=selectedFilePath.split('/').pop();
+    if(!confirm('¿Borrar definitivamente "'+name+'"?'+(entries.find(f=>(dir?dir+'/':'')+f.name===selectedFilePath)?.dir?' Se eliminará también todo su contenido.':'')))return;
+    try { await api('file-op','POST',{action:'delete',path:selectedFilePath}); if(fileClipboard?.path===selectedFilePath)fileClipboard=null; selectedFilePath=null; toast('Elemento borrado'); files(); }
+    catch(err){toast(err && err.message ? err.message : 'No se pudo completar la operación. Revisa el mensaje anterior.');}
+  };
+}
+
+let listed = new Set();
+const up1 = (f) => new Promise((res) => {
+  const exists = listed.has(f.name);
+  if (exists && !confirm('Ya existe "' + f.name + '". ¿Reemplazarlo?')) return res();
+  const x = new XMLHttpRequest();
+  x.open('POST', '/api/upload?path=' + encodeURIComponent(dir) + '&name=' + encodeURIComponent(f.name) + (exists ? '&overwrite=1' : ''));
+  x.setRequestHeader('Authorization', 'Bearer ' + T); x.setRequestHeader('Content-Type', 'application/octet-stream');
+  const tk = tray(f.name);
+  x.upload.onprogress = (e) => { if (e.lengthComputable) tk(100 * e.loaded / e.total); };
+  x.onload = () => {
+    if (x.status === 401) return logout();
+    let m = {}; try { m = JSON.parse(x.responseText); } catch { }
+    toast(x.status < 300 ? 'Subido: ' + f.name : m.error || 'No se pudo subir ' + f.name); tk(100, x.status < 300 ? 'Listo' : 'Error', true, x.status >= 300); res();
+  };
+  x.onerror = () => { toast('Se cortó la conexión al subir ' + f.name); tk(100, 'Error', true, true); res(); };
+  x.send(f);
+});
+async function upload(fl) {
+  const arr = [...fl]; if (!arr.length) return;
+  try { listed = new Set((await api('files?path=' + encodeURIComponent(dir))).map((f) => f.name)); } catch { return; }
+  for (const f of arr) await up1(f);
+  if (cur === 'files') files();
+}
+async function users() {
+  const l = await api('users'), v = $('#v');
+  v.innerHTML = `<div class="list">${l.map((u) => `<div class="item"><span class="n">${esc(u.name)}</span><span class="mu">${{ admin: 'administrador', mod: 'moderador', viewer: 'solo lectura' }[u.role]}</span>${u.name === me.name ? '' : `<button class="d" data-x="${esc(u.name)}">Eliminar</button>`}</div>`).join('')}</div>
+  <div class="grid"><label>Usuario<input id="nu"></label><label>Contraseña (mínimo 8)<input id="np" type="password"></label><label>Rol<select id="nr"><option value="viewer">Solo lectura</option><option value="mod">Moderador</option><option value="admin">Administrador</option></select></label></div><div><button class="p" id="na">Crear usuario</button></div>`;
+  $('#na').onclick = () => api('users', 'POST', { name: $('#nu').value.trim(), pass: $('#np').value, role: $('#nr').value }).then(() => { toast('Usuario creado'); users(); });
+  v.onclick = (e) => { const x = e.target.dataset.x; x && confirm('¿Eliminar a ' + x + '?') && api('users/' + x, 'DELETE').then(users); };
+}
+const tray = (name) => {
+  const r = document.createElement('div'); r.className = 'ur glass'; r.innerHTML = '<span></span><b>0%</b><i></i>'; r.firstChild.textContent = name;
+  $('#ut').appendChild(r); $('#ut').hidden = false;
+  return (p, label, final, bad) => {
+    r.querySelector('b').textContent = label || Math.round(p) + '%'; r.querySelector('i').style.width = p + '%'; bad && r.classList.add('bad');
+    if (final) setTimeout(() => { r.remove(); $('#ut').children.length || ($('#ut').hidden = true); }, 2500);
+  };
+};
+
+// ---- Arrastrar y soltar: el panel detecta archivos en cualquier pestaña ----
+const KIND = (t) => /^image\//.test(t) ? ['IMG', '#f0566a'] : /^video\//.test(t) ? ['VID', '#f5b94a'] : t === 'application/pdf' ? ['PDF', '#4ade80'] : /zip|java-archive|compressed/.test(t) ? ['ZIP', '#8A5CFF'] : ['FILE', '#5ec8ff'];
+const fileSvg = (t, c) => `<svg viewBox="0 0 54 68" width="54" height="68"><path d="M6 2h28l14 14v46a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z" fill="rgba(255,255,255,.12)" stroke="${c}" stroke-width="2"/><path d="M34 2v12a2 2 0 0 0 2 2h12" fill="${c}" opacity=".5"/><text x="27" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="${c}" font-family="Sora,sans-serif">${t}</text></svg>`;
+const dz = $('#dz'), box = $('#dzb'), ico = $('#dzi');
+let dc = 0, dt, px = 0;
+const isF = (e) => e.dataTransfer && [...e.dataTransfer.types].includes('Files');
+const on = () => me && !$('#app').hidden;
+const can = () => me && me.role === 'admin';
+const dzHide = () => { dc = 0; clearTimeout(dt); dz.hidden = true; dz.classList.remove('hot'); };
+function dzShow(e) {
+  const it = e.dataTransfer.items, n = it.length || 1, k = KIND(it[0] ? it[0].type : '');
+  ico.innerHTML = fileSvg(k[0], k[1]) + (n > 1 ? `<em>${n}</em>` : '');
+  $('#dzt').textContent = can() ? (n > 1 ? `Suelta los ${n} archivos aquí` : 'Suelta el archivo aquí') : 'Solo los administradores pueden subir archivos';
+  $('#dzs').textContent = can() ? 'Se subirán a /' + dir : 'Pídele a un administrador que lo suba';
+  dz.classList.toggle('no', !can()); dz.hidden = false;
+}
+addEventListener('dragenter', (e) => { if (!isF(e)) return; e.preventDefault(); if (on() && dc++ === 0) dzShow(e); });
+addEventListener('dragleave', (e) => { if (isF(e) && on() && --dc <= 0) dzHide(); });
+addEventListener('dragover', (e) => {
+  if (!isF(e)) return; e.preventDefault(); if (!on()) return;
+  e.dataTransfer.dropEffect = can() ? 'copy' : 'none';
+  const dx = e.clientX - px; px = e.clientX;
+  ico.style.transform = `translate(${e.clientX}px,${e.clientY}px) translate(-50%,-50%) rotate(${Math.max(-18, Math.min(18, dx * .8))}deg)`;
+  const r = box.getBoundingClientRect();
+  dz.classList.toggle('hot', e.clientX > r.left && e.clientX < r.right && e.clientY > r.top && e.clientY < r.bottom);
+  dz.querySelectorAll('.fc').forEach((c) => c.style.translate = `${(e.clientX / innerWidth - .5) * -c.dataset.k}px ${(e.clientY / innerHeight - .5) * -c.dataset.k}px`);
+  clearTimeout(dt); dt = setTimeout(dzHide, 1000);
+});
+addEventListener('drop', (e) => {
+  if (!isF(e)) return; e.preventDefault(); dzHide();
+  if (!on()) return;
+  if (can()) upload(e.dataTransfer.files); else toast('Solo los administradores pueden subir archivos');
+});
+
+// Añade una breve explicación a cada campo de formulario, también a los que se crean dinámicamente.
+(function fieldHelp(){
+  const helpById={
+    u:'Tu nombre de usuario para entrar al panel.',p:'Tu contraseña de acceso al panel.',quickSrv:'Elige el servidor cuyos datos y controles quieres ver.',
+    nsName:'Nombre con el que identificarás este servidor en el panel.',nsDir:'Ruta completa de la carpeta donde están los archivos del servidor.',nsCmd:'Comando o archivo que se ejecuta para iniciar este servidor.',
+    it:'Tipo de software de servidor que quieres instalar, por ejemplo Vanilla, Paper, Forge o NeoForge.',iv:'Versión del software elegido que se instalará.',ir:'Cargador o plataforma de mods que se utilizará, cuando corresponda.',idir:'Carpeta de destino donde se instalará el servidor.',
+    mq:'Busca un mod por nombre o palabra clave.',mv:'Limita los resultados a una versión concreta de Minecraft.',ml:'Filtra los mods por el cargador compatible con tu servidor.',
+    mpq:'Busca el modpack que quieres instalar por nombre.',mpv:'Filtra los modpacks compatibles con esta versión de Minecraft; puedes dejarlo vacío.',
+    nu:'Nombre de la cuenta nueva que se creará.',np:'Contraseña de la cuenta nueva; utiliza al menos 8 caracteres.',nr:'Permisos que tendrá la cuenta dentro del panel.',cm:'Escribe un comando de consola para enviarlo al servidor.',
+    ed:'Contenido del archivo seleccionado. Los cambios no se aplican hasta guardarlo.'
+  };
+  function explain(el){
+    if(!el || !el.matches || !el.matches('input,select,textarea') || el.type==='hidden' || el.dataset.noInfo==='true' || el.dataset.infoAdded) return;
+    let tip=helpById[el.id];
+    const label=el.closest('label');
+    const labelText=label ? label.innerText.replace(/ⓘ/g,' ').replace(/\s+/g,' ').trim() : '';
+    const placeholder=el.getAttribute('placeholder')||'';
+    const hay=(labelText+' '+placeholder+' '+el.id).toLowerCase();
+    if(!tip){
+      if(/contraseñ|password/.test(hay)) tip='Contraseña necesaria para autenticarte o crear la cuenta.';
+      else if(/usuario|username/.test(hay)) tip='Nombre de usuario que identifica esta cuenta.';
+      else if(/ruta|carpeta|directorio|path/.test(hay)) tip='Indica la ubicación en el disco donde se encuentran o guardarán los archivos.';
+      else if(/versión|version/.test(hay)) tip='Versión del juego o del componente que quieres utilizar. Debe ser compatible con el servidor.';
+      else if(/cargador|loader|fabric|forge|quilt|neoforge/.test(hay)) tip='Plataforma que permite cargar mods. Debe coincidir con la versión del juego y los mods.';
+      else if(/modpack|paquete/.test(hay)) tip='Busca o selecciona el paquete de mods que quieres instalar.';
+      else if(/mod/.test(hay)) tip='Busca, selecciona o configura el mod relacionado con este campo.';
+      else if(/comando|command/.test(hay)) tip='Comando que se ejecutará en la consola del servidor.';
+      else if(/nombre|name/.test(hay)) tip='Nombre para identificar este elemento dentro del panel.';
+      else if(/ram|memoria/.test(hay)) tip='Cantidad de memoria que se reservará para el servidor.';
+      else if(/jugador|player/.test(hay)) tip='Nombre del jugador al que se aplicará esta acción.';
+      else if(el.tagName==='SELECT') tip='Selecciona una de las opciones disponibles para configurar esta función.';
+      else if(el.type==='file') tip='Selecciona el archivo de tu equipo que quieres subir.';
+      else if(el.type==='checkbox') tip='Activa o desactiva esta opción.';
+      else if(el.type==='number') tip='Introduce un valor numérico para esta configuración.';
+      else tip=placeholder ? 'Introduce aquí '+placeholder.replace(/[.?!]+$/,'').toLowerCase()+'.' : 'Introduce el valor que se utilizará en esta configuración.';
+    }
+    const icon=document.createElement('button'); icon.type='button'; icon.className='field-info'; icon.textContent='i'; icon.title=tip; icon.dataset.tip=tip; icon.setAttribute('aria-label','Información: '+tip); icon.setAttribute('aria-describedby','');
+    if(label){
+      // Insert beside the label text, before its control, without changing the input's value or name.
+      const firstControl=label.querySelector('input,select,textarea');
+      if(firstControl && firstControl.parentNode===label) label.insertBefore(icon,firstControl); else if(label.firstElementChild) label.insertBefore(icon,label.firstElementChild); else label.appendChild(icon);
+    }else{
+      el.insertAdjacentElement('beforebegin',icon);
+    }
+    el.dataset.infoAdded='true';
+  }
+  function scan(root){
+    if(root.nodeType===1 && root.matches('input,select,textarea')) explain(root);
+    if(root.querySelectorAll) root.querySelectorAll('input,select,textarea').forEach(explain);
+  }
+  scan(document);
+  new MutationObserver(records=>records.forEach(rec=>rec.addedNodes.forEach(node=>{if(node.nodeType===1)scan(node)}))).observe(document.body,{childList:true,subtree:true});
+})();
+
+boot();
+
+// ==========================================
+// NUEVAS VISTAS IMPLEMENTADAS EN TWINKLE 2.0.2
+// ==========================================
+
+// ------------------------------------------
+// 1. MONITOR DE RENDIMIENTO (CPU, RAM, TPS, HISTORIAL)
+// ------------------------------------------
+let metricsTimer = null;
+async function renderMetricsView() {
+  const v = $('#v');
+  v.innerHTML = `
+    <div>
+      <h2 style="margin:0 0 4px;display:flex;align-items:center;gap:8px">
+        <span>📈</span> Monitor de Rendimiento y Estadísticas
+      </h2>
+      <p class="mu" style="margin:0">Métricas en tiempo real de RAM, CPU, Jugadores y TPS del servidor.</p>
+    </div>
+
+    <!-- Indicadores en tiempo real -->
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px">
+      <div class="chart-box">
+        <span class="mu" style="font-size:12px">TPS (Ticks Por Segundo)</span>
+        <div style="display:flex;align-items:baseline;gap:8px">
+          <b id="m-tps" style="font-size:26px;color:var(--ok)">20.0</b>
+          <span style="font-size:12px;color:var(--mu)">/ 20.0 max</span>
+        </div>
+        <span id="m-tps-desc" class="mu" style="font-size:11px">Rendimiento óptimo del motor</span>
+      </div>
+
+      <div class="chart-box">
+        <span class="mu" style="font-size:12px">Uso de RAM</span>
+        <div style="display:flex;align-items:baseline;gap:8px">
+          <b id="m-ram" style="font-size:26px;color:var(--tx)">0%</b>
+          <span id="m-ram-mb" style="font-size:12px;color:var(--mu)">(0 / 2048 MB)</span>
+        </div>
+        <div id="m-ram-alert" style="font-size:11px;color:var(--mu)">Dentro del límite normal</div>
+      </div>
+
+      <div class="chart-box">
+        <span class="mu" style="font-size:12px">Carga de CPU (Servidor)</span>
+        <div style="display:flex;align-items:baseline;gap:8px">
+          <b id="m-cpu" style="font-size:26px;color:var(--tx)">0%</b>
+          <span style="font-size:12px;color:var(--mu)">de proceso</span>
+        </div>
+        <span class="mu" style="font-size:11px">Proceso Java y subprocesos</span>
+      </div>
+
+      <div class="chart-box">
+        <span class="mu" style="font-size:12px">Jugadores Activos</span>
+        <div style="display:flex;align-items:baseline;gap:8px">
+          <b id="m-players" style="font-size:26px;color:var(--ac)">0</b>
+          <span style="font-size:12px;color:var(--mu)">en línea</span>
+        </div>
+        <span class="mu" style="font-size:11px">Conexiones simultáneas</span>
+      </div>
+    </div>
+
+    <!-- Gráficos de Historial Canvas -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="chart-box">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <b style="font-size:13px">Historial de Consumo de RAM (%)</b>
+          <span class="mu" style="font-size:11px">Últimos 2 minutos</span>
+        </div>
+        <canvas id="canvas-ram" class="chart-canvas" width="400" height="110"></canvas>
+      </div>
+
+      <div class="chart-box">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <b style="font-size:13px">Historial de Uso de CPU (%)</b>
+          <span class="mu" style="font-size:11px">Últimos 2 minutos</span>
+        </div>
+        <canvas id="canvas-cpu" class="chart-canvas" width="400" height="110"></canvas>
+      </div>
+    </div>
+  `;
+
+  function drawLineChart(canvasId, points, color, maxVal = 100) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    // Fondo y cuadrícula
+    ctx.strokeStyle = 'rgba(138,170,255, 0.1)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, h * 0.25); ctx.lineTo(w, h * 0.25);
+    ctx.moveTo(0, h * 0.5); ctx.lineTo(w, h * 0.5);
+    ctx.moveTo(0, h * 0.75); ctx.lineTo(w, h * 0.75);
+    ctx.stroke();
+
+    if (!points || points.length < 2) return;
+
+    const step = w / (points.length - 1);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    points.forEach((val, i) => {
+      const y = h - (Math.min(maxVal, Math.max(0, val)) / maxVal) * (h - 12) - 6;
+      const x = i * step;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+
+    // Relleno gradiente
+    ctx.lineTo(w, h);
+    ctx.lineTo(0, h);
+    ctx.closePath();
+    const grad = ctx.createLinearGradient(0, 0, 0, h);
+    grad.addColorStop(0, color.replace(')', ', 0.25)').replace('rgb', 'rgba'));
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grad;
+    ctx.fill();
+  }
+
+  async function updateMetrics() {
+    if (cur !== 'metrics') return;
+    try {
+      const data = await api('metrics');
+      const hist = data.history || [];
+      const curData = data.current || {};
+
+      const tpsVal = Number(curData.tps) || 20.0;
+      $('#m-tps').textContent = tpsVal.toFixed(1);
+      $('#m-tps').style.color = tpsVal >= 18 ? 'var(--ok)' : (tpsVal >= 14 ? 'var(--warn)' : 'var(--bad)');
+      $('#m-tps-desc').textContent = tpsVal >= 18 ? 'Rendimiento fluido' : (tpsVal >= 14 ? 'Ligera sobrecarga' : '¡Lag severo detectado!');
+
+      const ramPct = curData.ramPct || 0;
+      $('#m-ram').textContent = ramPct + '%';
+      $('#m-ram-mb').textContent = '(' + (curData.ramMb || 0) + ' / ' + (curData.maxRamMb || 2048) + ' MB)';
+      const ramAlert = $('#m-ram-alert');
+      if (ramPct >= 90) {
+        ramAlert.textContent = '⚠️ ¡Peligro: RAM al límite!';
+        ramAlert.style.color = 'var(--bad)';
+      } else if (ramPct >= 75) {
+        ramAlert.textContent = 'Precaución: uso elevado de memoria';
+        ramAlert.style.color = 'var(--warn)';
+      } else {
+        ramAlert.textContent = 'Consumo estable';
+        ramAlert.style.color = 'var(--mu)';
+      }
+
+      $('#m-cpu').textContent = (curData.cpu || 0) + '%';
+      $('#m-players').textContent = curData.players || S.players.length || 0;
+
+      // Dibujar gráficos
+      const ramPoints = hist.map(x => x.ramPct || 0);
+      drawLineChart('canvas-ram', ramPoints, 'rgb(74, 222, 128)', 100);
+
+      const cpuPoints = hist.map(x => x.cpu || 0);
+      drawLineChart('canvas-cpu', cpuPoints, 'rgb(96, 165, 250)', 100);
+    } catch {}
+  }
+
+  await updateMetrics();
+  if (metricsTimer) clearInterval(metricsTimer);
+  metricsTimer = setInterval(updateMetrics, 2000);
+}
+
+// ------------------------------------------
+// 2. GESTIÓN DE JUGADORES + VISOR DE INVENTARIOS (SI O SI)
+// ------------------------------------------
+let selectedPlayerForInv = null;
+async function renderPlayersView() {
+  const v = $('#v');
+  const onlinePlayers = S.players || [];
+  
+  v.innerHTML = `
+    <div>
+      <h2 style="margin:0 0 4px;display:flex;align-items:center;gap:8px">
+        <span>👥</span> Gestión Avanzada de Jugadores
+      </h2>
+      <p class="mu" style="margin:0">Monitorea jugadores, ejecuta acciones rápidas y visualiza su inventario completo en directo.</p>
+    </div>
+
+    <!-- Lista de conectados y visor -->
+    <div style="display:grid;grid-template-columns:minmax(280px, 340px) 1fr;gap:16px;align-items:start">
+      <!-- Panel de lista y acciones -->
+      <div class="glass" style="padding:14px;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <b style="font-size:13px">Conectados (${onlinePlayers.length})</b>
+          <input id="pl-search" placeholder="Buscar…" style="width:110px;padding:3px 8px;font-size:11px">
+        </div>
+
+        <div class="list" id="pl-online-list" style="max-height:220px;overflow:auto">
+          ${onlinePlayers.map(p => `
+            <div class="item ${p === selectedPlayerForInv ? 'sel' : ''}" style="justify-content:space-between;padding:8px 12px;cursor:pointer" data-player="${esc(p)}">
+              <span class="n" style="font-weight:600">🎮 ${esc(p)}</span>
+              <button class="p" style="padding:3px 8px;font-size:11px" data-view-inv="${esc(p)}">🎒 Ver Inventario</button>
+            </div>
+          `).join('') || '<p class="mu" style="font-size:12px;margin:8px 0">No hay jugadores conectados.</p>'}
+        </div>
+
+        <!-- Acciones manuales de moderación rápida -->
+        <hr style="margin:4px 0">
+        <b style="font-size:12px">Acciones sobre un jugador:</b>
+        <input id="pl-target-name" placeholder="Nombre exacto del jugador" value="${esc(selectedPlayerForInv || '')}" style="font-size:12px">
+        
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <button data-pl-action="op" style="font-size:11px">👑 Dar OP</button>
+          <button data-pl-action="deop" style="font-size:11px">Quitar OP</button>
+          <button data-pl-action="kick" style="font-size:11px">🚪 Expulsar</button>
+          <button data-pl-action="whitelist add" style="font-size:11px">📋 Whitelist</button>
+          <button class="d" data-pl-action="ban" style="font-size:11px">🔨 Vetar (Ban)</button>
+          <button class="d" data-pl-action="ban-ip" style="font-size:11px">🚫 Ban IP</button>
+          <button data-pl-action="pardon" style="font-size:11px">Quitar Veto</button>
+          <button data-pl-action="gamemode creative" style="font-size:11px">🎨 Modo Creativo</button>
+          <button data-pl-action="gamemode survival" style="font-size:11px">⚔️ Modo Supervivencia</button>
+          <button class="d" data-pl-action="kill" style="font-size:11px">💀 Eliminar (Kill)</button>
+        </div>
+      </div>
+
+      <!-- VISOR DE INVENTARIO MINECRAFT -->
+      <div class="mc-inv-container" id="player-inventory-view">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+          <div>
+            <h3 style="margin:0;font-size:16px;display:flex;align-items:center;gap:6px" id="inv-player-name">
+              🎒 Inventario del Jugador
+            </h3>
+            <span class="mu" style="font-size:11px" id="inv-player-uuid">Selecciona un jugador o escribe su nombre para cargar su inventario.</span>
+          </div>
+          <button class="p" id="inv-reload-btn" style="padding:4px 10px;font-size:12px">🔄 Actualizar</button>
+        </div>
+
+        <div id="inv-content-box">
+          <p class="mu" style="text-align:center;padding:30px">
+            Haz clic en "Ver Inventario" junto a cualquier jugador de la lista, o ingresa su nombre para leer sus datos guardados (.dat).
+          </p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Asignar eventos de acciones de moderación
+  v.querySelectorAll('[data-pl-action]').forEach(btn => {
+    btn.onclick = async () => {
+      const act = btn.dataset.plAction;
+      const target = $('#pl-target-name').value.trim();
+      if (!target) return toast('Ingresa el nombre del jugador primero.');
+      if (act === 'ban' || act === 'ban-ip') {
+        if (!confirm('¿Confirmas vetar al jugador ' + target + '?')) return;
+      }
+      await api('cmd', 'POST', { cmd: act + ' ' + target });
+      toast('Comando ejecutado: ' + act + ' ' + target);
+    };
+  });
+
+  // Evento al hacer clic en jugador de la lista
+  v.querySelectorAll('[data-player]').forEach(item => {
+    item.onclick = (e) => {
+      const p = item.dataset.player;
+      $('#pl-target-name').value = p;
+      if (e.target.dataset.viewInv) {
+        loadPlayerInventory(p);
+      }
+    };
+  });
+
+  $('#inv-reload-btn').onclick = () => {
+    const p = $('#pl-target-name').value.trim();
+    if (p) loadPlayerInventory(p);
+  };
+
+  if (selectedPlayerForInv) {
+    loadPlayerInventory(selectedPlayerForInv);
+  }
+}
+
+async function loadPlayerInventory(player) {
+  selectedPlayerForInv = player;
+  const box = $('#inv-content-box');
+  const nameEl = $('#inv-player-name');
+  const uuidEl = $('#inv-player-uuid');
+  if (!box) return;
+
+  nameEl.innerHTML = '🎒 Inventario de <span style="color:#4DA3FF">' + esc(player) + '</span>';
+  uuidEl.textContent = 'Cargando datos NBT del jugador…';
+  box.innerHTML = '<p class="mu" style="text-align:center;padding:25px">Leyendo archivo .dat y renderizando slots…</p>';
+
+  try {
+    const data = await api('player/inventory?player=' + encodeURIComponent(player));
+    uuidEl.textContent = 'UUID: ' + (data.uuid || 'desconocido') + ' · Salud: ' + Math.round(data.health || 20) + '/20 · Nivel XP: ' + (data.xpLevel || 0);
+
+    const formatItemName = (id) => {
+      if (!id || id === 'minecraft:air') return '';
+      return id.replace('minecraft:', '').replace(/_/g, ' ');
+    };
+
+    const getItemEmoji = (id) => {
+      if (!id) return '';
+      const s = id.toLowerCase();
+      if (s.includes('sword') || s.includes('axe')) return '🗡️';
+      if (s.includes('pickaxe')) return '⛏️';
+      if (s.includes('shovel')) return '🥄';
+      if (s.includes('helmet') || s.includes('cap')) return '🪖';
+      if (s.includes('chestplate') || s.includes('tunic')) return '🦺';
+      if (s.includes('leggings') || s.includes('pants')) return '👖';
+      if (s.includes('boots')) return '🥾';
+      if (s.includes('bow') || s.includes('arrow')) return '🏹';
+      if (s.includes('apple') || s.includes('bread') || s.includes('meat') || s.includes('beef')) return '🍖';
+      if (s.includes('diamond')) return '💎';
+      if (s.includes('gold') || s.includes('ingot')) return '🪙';
+      if (s.includes('potion')) return '🧪';
+      if (s.includes('book')) return '📖';
+      return '📦';
+    };
+
+    const renderSlot = (item, label = '') => {
+      const has = item && item.id && item.id !== 'minecraft:air';
+      const cleanName = has ? formatItemName(item.id) : '';
+      return `
+        <div class="mc-slot ${has ? 'has-item' : ''}" title="${has ? cleanName + ' (' + item.id + ')' : label || 'Vacío'}">
+          ${has ? `<span class="mc-item-icon">${getItemEmoji(item.id)}</span>` : (label ? `<span style="opacity:0.25;font-size:10px">${label}</span>` : '')}
+          ${has && item.count > 1 ? `<span class="mc-slot-count">${item.count}</span>` : ''}
+        </div>
+      `;
+    };
+
+    // Crear mapa de slots 0-35 (9-35 inventario principal, 0-8 hotbar)
+    const slotMap = new Map();
+    (data.inventory || []).forEach(it => slotMap.set(Number(it.slot), it));
+
+    box.innerHTML = `
+      <!-- Fila de armadura y mano secundaria -->
+      <div style="display:flex;align-items:center;gap:18px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--bd)">
+        <div>
+          <span class="mu" style="font-size:11px;display:block;margin-bottom:4px">Armadura</span>
+          <div style="display:flex;gap:6px">
+            ${renderSlot(data.armor.head, 'Casco')}
+            ${renderSlot(data.armor.chest, 'Peto')}
+            ${renderSlot(data.armor.legs, 'Pantalón')}
+            ${renderSlot(data.armor.feet, 'Botas')}
+          </div>
+        </div>
+        <div>
+          <span class="mu" style="font-size:11px;display:block;margin-bottom:4px">Mano izq.</span>
+          ${renderSlot(data.offhand, 'Escudo/Mano')}
+        </div>
+        <div style="margin-left:auto;font-size:12px;line-height:1.6">
+          <div>❤️ Salud: <b>${Math.round(data.health)}/20</b></div>
+          <div>🍗 Comida: <b>${data.food}/20</b></div>
+        </div>
+      </div>
+
+      <!-- Inventario Principal (27 slots: 9 a 35) -->
+      <div>
+        <span class="mu" style="font-size:11px;display:block;margin-bottom:6px">Inventario Principal</span>
+        <div class="mc-slots-grid" style="grid-template-columns:repeat(9, 44px)">
+          ${[...Array(27)].map((_, idx) => renderSlot(slotMap.get(idx + 9))).join('')}
+        </div>
+      </div>
+
+      <!-- Hotbar (Barra rápida: slots 0 a 8) -->
+      <div style="margin-top:12px">
+        <span class="mu" style="font-size:11px;display:block;margin-bottom:6px">Barra Rápida (Hotbar 1–9)</span>
+        <div class="mc-slots-grid" style="grid-template-columns:repeat(9, 44px);background:rgba(77,163,255,0.06);padding:6px;border-radius:8px">
+          ${[...Array(9)].map((_, idx) => renderSlot(slotMap.get(idx))).join('')}
+        </div>
+      </div>
+
+      <!-- Cofre de Ender (27 slots) si contiene items -->
+      ${data.enderChest && data.enderChest.length ? `
+        <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--bd)">
+          <span class="mu" style="font-size:11px;display:block;margin-bottom:6px">🔮 Cofre de Ender (${data.enderChest.length} items)</span>
+          <div class="mc-slots-grid" style="grid-template-columns:repeat(9, 44px)">
+            ${[...Array(27)].map((_, idx) => {
+              const it = data.enderChest.find(x => Number(x.slot) === idx);
+              return renderSlot(it);
+            }).join('')}
+          </div>
+        </div>
+      ` : ''}
+    `;
+  } catch (err) {
+    box.innerHTML = `<div class="item" style="color:var(--bad)">
+      No se pudo leer el archivo .dat del jugador. Asegúrate de que el mundo ya se haya guardado (comando 'save-all') o de que el jugador haya ingresado al servidor al menos una vez.
+    </div>`;
+  }
+}
+
+// ------------------------------------------
+// 3. COPIAS DE SEGURIDAD AUTOMÁTICAS (BACKUPS)
+// ------------------------------------------
+async function renderBackupsView() {
+  const v = $('#v');
+  v.innerHTML = `
+    <div>
+      <h2 style="margin:0 0 4px;display:flex;align-items:center;gap:8px">
+        <span>💾</span> Copias de Seguridad Automáticas
+      </h2>
+      <p class="mu" style="margin:0">Crea respaldos completos o selectivos (mundo, plugins, mods, configs) y restaura con verificación de integridad.</p>
+    </div>
+
+    <!-- Acciones de creación rápida -->
+    <div class="glass" style="padding:16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <label style="margin:0;font-size:12px">Contenido a respaldar:
+          <select id="bk-scope" style="width:auto;display:inline-block;margin-left:6px;padding:5px 8px">
+            <option value="all">Servidor Completo (Mundo + Configs + Plugins + Mods)</option>
+            <option value="world">Solo Mundos (World, Nether, End)</option>
+            <option value="addons">Solo Complementos (Plugins y Mods)</option>
+            <option value="config">Solo Archivos de Configuración</option>
+          </select>
+        </label>
+        <input id="bk-note" placeholder="Nota opcional (ej: Antes de actualizar mods)" style="width:240px;padding:5px 10px;font-size:12px">
+      </div>
+      <button class="p" id="bk-create-btn">📦 Crear Copia Ahora</button>
+    </div>
+
+    <!-- Lista de copias existentes -->
+    <div>
+      <h3 style="margin:14px 0 8px">Copias de seguridad guardadas</h3>
+      <div class="list" id="bk-list"><p class="mu">Cargando lista de copias de seguridad…</p></div>
+    </div>
+  `;
+
+  const loadList = async () => {
+    try {
+      const data = await api('backups');
+      const listEl = $('#bk-list');
+      if (!data.backups || !data.backups.length) {
+        listEl.innerHTML = '<p class="mu">No hay copias de seguridad guardadas en la carpeta .craftpanel-backups.</p>';
+        return;
+      }
+      listEl.innerHTML = data.backups.map(b => `
+        <div class="item" style="justify-content:space-between;flex-wrap:wrap;gap:10px">
+          <div>
+            <b style="font-size:13px">📦 ${esc(b.filename)}</b>
+            <div class="mu" style="font-size:11.5px;margin-top:2px">
+              Fecha: ${new Date(b.created).toLocaleString()} · Tamaño: ${(b.size / 1024 / 1024).toFixed(2)} MB · Integridad: ${b.verified ? '✅ Verificado' : 'Pendiente'}
+            </div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="p" data-bk-restore="${esc(b.filename)}">Restaurar copia</button>
+          </div>
+        </div>
+      `).join('');
+
+      listEl.querySelectorAll('[data-bk-restore]').forEach(btn => {
+        btn.onclick = async () => {
+          const fn = btn.dataset.bkRestore;
+          if (S.status !== 'offline') {
+            return toast('Debes apagar el servidor antes de restaurar una copia.');
+          }
+          if (!confirm('⚠️ RESTAURACIÓN DE COPIA DE SEGURIDAD\n\nSe sobreescribirán los archivos del servidor con los de la copia «' + fn + '». ¿Deseas continuar?')) return;
+          btn.disabled = true;
+          btn.textContent = 'Restaurando…';
+          try {
+            await api('backups/restore', 'POST', { filename: fn });
+            toast('¡Copia de seguridad restaurada con éxito!');
+          } catch (e) {
+            toast('Fallo al restaurar: ' + (e.message || 'error'));
+          } finally {
+            btn.disabled = false;
+            btn.textContent = 'Restaurar copia';
+          }
+        };
+      });
+    } catch {
+      $('#bk-list').innerHTML = '<p class="mu">Error al cargar copias de seguridad.</p>';
+    }
+  };
+
+  $('#bk-create-btn').onclick = async () => {
+    const btn = $('#bk-create-btn');
+    btn.disabled = true;
+    btn.textContent = 'Creando copia (comprimiendo…)';
+    try {
+      const scope = $('#bk-scope').value;
+      const note = $('#bk-note').value.trim();
+      toast('Iniciando compresión de copia de seguridad…');
+      await api('backups', 'POST', { scope, note });
+      toast('¡Copia de seguridad creada con éxito!');
+      $('#bk-note').value = '';
+      loadList();
+    } catch (e) {
+      toast('No se pudo crear la copia: ' + (e.message || 'error'));
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '📦 Crear Copia Ahora';
+    }
+  };
+
+  await loadList();
+}
+
+// ------------------------------------------
+// 4. SEGURIDAD Y REGISTRO DE AUDITORÍA
+// ------------------------------------------
+async function renderSecurityView() {
+  const v = $('#v');
+  v.innerHTML = `
+    <div>
+      <h2 style="margin:0 0 4px;display:flex;align-items:center;gap:8px">
+        <span>🛡️</span> Seguridad y Registro de Acciones (Auditoría)
+      </h2>
+      <p class="mu" style="margin:0">Historial inmutable de operaciones sensibles realizadas en Twinkle (inicios, apagados, comandos, respaldos).</p>
+    </div>
+
+    <div class="glass" style="padding:14px;overflow:auto">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <b style="font-size:13px">Registros de Actividad Reciente</b>
+        <button id="sec-refresh" style="font-size:11px;padding:3px 8px">🔄 Refrescar</button>
+      </div>
+
+      <table style="width:100%;border-collapse:collapse;font-size:12px;text-align:left">
+        <thead>
+          <tr style="border-bottom:1px solid var(--bd);color:var(--mu)">
+            <th style="padding:8px">Hora</th>
+            <th style="padding:8px">Usuario</th>
+            <th style="padding:8px">Acción</th>
+            <th style="padding:8px">Detalles</th>
+          </tr>
+        </thead>
+        <tbody id="sec-tbody">
+          <tr><td colspan="4" style="padding:14px;text-align:center" class="mu">Cargando auditoría…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  const loadAudit = async () => {
+    try {
+      const data = await api('audit');
+      const tbody = $('#sec-tbody');
+      if (!data.logs || !data.logs.length) {
+        tbody.innerHTML = '<tr><td colspan="4" style="padding:14px;text-align:center" class="mu">No hay registros de auditoría aún.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = data.logs.map(log => `
+        <tr style="border-bottom:1px solid rgba(138,170,255,0.08)">
+          <td style="padding:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mu)">${new Date(log.time).toLocaleTimeString()}</td>
+          <td style="padding:8px;font-weight:600">${esc(log.user || 'sistema')}</td>
+          <td style="padding:8px"><span style="background:rgba(77,163,255,0.12);color:var(--ac);padding:2px 6px;border-radius:6px;font-size:11px">${esc(log.action)}</span></td>
+          <td style="padding:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx)">${esc(JSON.stringify(log.details || {}))}</td>
+        </tr>
+      `).join('');
+    } catch {
+      $('#sec-tbody').innerHTML = '<tr><td colspan="4" style="padding:14px;text-align:center;color:var(--bad)">Error al cargar registros.</td></tr>';
+    }
+  };
+
+  $('#sec-refresh').onclick = loadAudit;
+  await loadAudit();
+}
+
+</script>

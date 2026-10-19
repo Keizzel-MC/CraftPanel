@@ -1,0 +1,21 @@
+TWINKLE DESKTOP (Windows)
+
+Esta versión abre Twinkle en una ventana de escritorio propia, en lugar de abrir el navegador. Mantiene la interfaz web local y las funciones del panel.
+
+PARA PROBAR:
+1. Instala Node.js LTS desde https://nodejs.org/ si no lo tienes.
+2. Haz doble clic en INSTALAR-APLICACION-DESKTOP.bat.
+3. La primera ejecución necesita Internet para descargar Electron y las herramientas necesarias.
+
+PARA CREAR EL INSTALADOR .EXE:
+1. En Windows, haz doble clic en CREAR-INSTALADOR-WINDOWS.bat.
+2. Al terminar, busca el instalador dentro de la carpeta dist.
+3. Puedes instalarlo y crear un acceso directo en el escritorio.
+
+Los archivos de configuración y usuarios se guardan en la carpeta de datos de usuario de Twinkle para que no dependan de la carpeta de instalación.
+
+NOTA: este paquete contiene el proyecto preparado para construir el instalador; el instalador final debe generarse en Windows con los archivos y herramientas descargados por npm. No se ha probado la aplicación en ejecución en este entorno.
+
+
+SELECCION DE JAVA POR SERVIDOR
+En Gestor de Servidores, escribe la ruta completa a java.exe (por ejemplo, C:\Program Files\Eclipse Adoptium\jdk-25\bin\java.exe) y pulsa Guardar Java. Deja el campo vacío para usar el Java del PATH de Windows. Detén el servidor antes de guardar cambios.
