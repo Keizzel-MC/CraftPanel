@@ -1,18 +1,18 @@
-# CraftPanel
+# Twinkle
 
 **Administra tus servidores de Minecraft desde un solo lugar.**
 
-CraftPanel es una herramienta pensada para hacer más sencilla la administración de servidores de Minecraft, con versiones Web y Desktop. El proyecto está dirigido a jugadores, administradores de servidores y personas que quieran experimentar, aprender o crear su propio entorno de juego.
+Twinkle es una herramienta pensada para hacer más sencilla la administración de servidores de Minecraft, con versiones Web y Desktop. El proyecto está dirigido a jugadores, administradores de servidores y personas que quieran experimentar, aprender o crear su propio entorno de juego.
 
-> **CraftPanel: tu servidor, tu configuración, tu control.**
+> **Twinkle: tu servidor, tu configuración, tu control.**
 
-CraftPanel se publica como un proyecto abierto bajo la **licencia MIT**. Puedes estudiar el código, modificarlo, adaptarlo a tus necesidades y compartir tus propias versiones, siempre respetando las condiciones de la licencia.
+Twinkle se publica como un proyecto abierto bajo la **licencia MIT**. Puedes estudiar el código, modificarlo, adaptarlo a tus necesidades y compartir tus propias versiones, siempre respetando las condiciones de la licencia.
 
 ---
 
 ## 📚 Contenido
 
-- [¿Qué es CraftPanel?](#-qué-es-craftpanel)
+- [¿Qué es Twinkle?](#-qué-es-twinkle)
 - [Funciones principales](#-funciones-principales)
 - [Versiones disponibles](#-versiones-disponibles)
 - [Requisitos](#-requisitos)
@@ -21,22 +21,22 @@ CraftPanel se publica como un proyecto abierto bajo la **licencia MIT**. Puedes 
 - [Configuración y administración](#-configuración-y-administración)
 - [Seguridad y privacidad](#-seguridad-y-privacidad)
 - [Solución de problemas](#-solución-de-problemas)
-- [Participa en CraftPanel](#-participa-en-craftpanel)
+- [Participa en Twinkle](#-participa-en-twinkle)
 - [Licencia](#-licencia)
 - [Aviso sobre Minecraft](#-aviso-sobre-minecraft)
 
 ---
 
-## 🎮 ¿Qué es CraftPanel?
+## 🎮 ¿Qué es Twinkle?
 
-CraftPanel busca ofrecer una forma más accesible de organizar y administrar servidores de Minecraft. En vez de tener que recordar cada comando o gestionar todas las tareas manualmente, la aplicación reúne opciones de administración en una interfaz propia.
+Twinkle busca ofrecer una forma más accesible de organizar y administrar servidores de Minecraft. En vez de tener que recordar cada comando o gestionar todas las tareas manualmente, la aplicación reúne opciones de administración en una interfaz propia.
 
 El proyecto contempla dos versiones:
 
-- **CraftPanel Web:** una interfaz que se ejecuta localmente y se utiliza desde un navegador.
-- **CraftPanel Desktop:** una aplicación para Windows enfocada en la administración desde el escritorio.
+- **Twinkle Web:** una interfaz que se ejecuta localmente y se utiliza desde un navegador.
+- **Twinkle Desktop:** una aplicación para Windows enfocada en la administración desde el escritorio.
 
-CraftPanel está pensado para distintos tipos de usuarios: quienes quieren jugar con amigos en un servidor propio, quienes están aprendiendo a administrar servidores y quienes desean explorar el código para adaptarlo o contribuir al proyecto.
+Twinkle está pensado para distintos tipos de usuarios: quienes quieren jugar con amigos en un servidor propio, quienes están aprendiendo a administrar servidores y quienes desean explorar el código para adaptarlo o contribuir al proyecto.
 
 Las funciones exactas pueden variar de una versión a otra. Consulta las instrucciones incluidas con la versión que descargues.
 
@@ -44,15 +44,15 @@ Las funciones exactas pueden variar de una versión a otra. Consulta las instruc
 
 ### 🗂️ Administración de servidores
 
-CraftPanel está diseñado para facilitar la organización y gestión de servidores de Minecraft desde una interfaz central. Comprueba siempre qué servidor y qué directorio tienes seleccionados antes de efectuar cambios.
+Twinkle está diseñado para facilitar la organización y gestión de servidores de Minecraft desde una interfaz central. Comprueba siempre qué servidor y qué directorio tienes seleccionados antes de efectuar cambios.
 
-### 🌐 CraftPanel Web
+### 🌐 Twinkle Web
 
-La versión Web permite utilizar la interfaz desde un navegador mientras el proceso de CraftPanel está en ejecución. El paquete Web utiliza Node.js y npm para instalar sus dependencias e iniciar la aplicación.
+La versión Web permite utilizar la interfaz desde un navegador mientras el proceso de Twinkle está en ejecución. El paquete Web utiliza Node.js y npm para instalar sus dependencias e iniciar la aplicación.
 
-> Ejecutarse en un navegador no significa que CraftPanel esté preparado automáticamente para publicarse en Internet. Revisa la configuración de red y la seguridad antes de permitir conexiones externas.
+> Ejecutarse en un navegador no significa que Twinkle esté preparado automáticamente para publicarse en Internet. Revisa la configuración de red y la seguridad antes de permitir conexiones externas.
 
-### 🖥️ CraftPanel Desktop
+### 🖥️ Twinkle Desktop
 
 La versión Desktop está orientada a Windows y busca ofrecer una experiencia de administración desde el escritorio.
 
@@ -68,7 +68,7 @@ La versión Desktop contempla la selección de una ruta de Java para el servidor
 
 ### 👤 Usuarios e instalación inicial
 
-Las versiones pueden incluir funciones de registro y gestión de usuarios. Si distribuyes o instalas CraftPanel en otro equipo, asegúrate de usar un paquete limpio que no contenga cuentas ni datos de tu propia instalación.
+Las versiones pueden incluir funciones de registro y gestión de usuarios. Si distribuyes o instalas Twinkle en otro equipo, asegúrate de usar un paquete limpio que no contenga cuentas ni datos de tu propia instalación.
 
 ---
 
@@ -83,18 +83,18 @@ Cuando haya paquetes listos para descargar, publícalos en la sección **Release
 
 ## 🛠️ Requisitos
 
-### CraftPanel Web
+### Twinkle Web
 
 - Una versión compatible de [Node.js](https://nodejs.org/).
 - npm, normalmente incluido con Node.js.
 - Un navegador moderno.
-- Los archivos de CraftPanel Web.
+- Los archivos de Twinkle Web.
 - Java y los archivos del servidor de Minecraft que quieras ejecutar, según tu configuración.
 
-### CraftPanel Desktop
+### Twinkle Desktop
 
 - Una versión compatible de Windows.
-- Los archivos de la distribución o el instalador oficial de CraftPanel.
+- Los archivos de la distribución o el instalador oficial de Twinkle.
 - Una versión de Java compatible con el servidor de Minecraft que vayas a utilizar.
 - Espacio suficiente para la aplicación, los servidores, los mundos y sus copias de seguridad.
 
@@ -104,9 +104,9 @@ Los requisitos pueden cambiar con futuras versiones.
 
 ## 🚀 Instalación
 
-### Instalar CraftPanel Web
+### Instalar Twinkle Web
 
-1. Descarga el paquete de CraftPanel Web desde **Releases**, si hay una versión publicada.
+1. Descarga el paquete de Twinkle Web desde **Releases**, si hay una versión publicada.
 2. Extrae el archivo ZIP en una carpeta de tu elección.
 3. Instala Node.js si todavía no lo tienes.
 4. Abre una terminal en la carpeta que contiene `package.json`.
@@ -116,7 +116,7 @@ Los requisitos pueden cambiar con futuras versiones.
    npm install
    ```
 
-6. Inicia CraftPanel:
+6. Inicia Twinkle:
 
    ```bash
    npm start
@@ -129,12 +129,12 @@ Para detener la aplicación, vuelve a la terminal en la que se está ejecutando 
 
 **Nota:** la dirección y el puerto pueden depender de la configuración de la versión descargada. Sigue el mensaje de inicio y las instrucciones de ese paquete.
 
-### Instalar CraftPanel Desktop
+### Instalar Twinkle Desktop
 
 1. Descarga la versión Desktop desde la sección **Releases**, si está disponible.
 2. Extrae el ZIP o ejecuta el instalador, según el formato distribuido.
 3. Lee las instrucciones incluidas en el paquete.
-4. Abre CraftPanel desde el archivo de inicio o el acceso directo suministrado.
+4. Abre Twinkle desde el archivo de inicio o el acceso directo suministrado.
 5. Configura las rutas y las opciones que necesites.
 
 Descarga ejecutables únicamente de fuentes confiables. Si Windows muestra una advertencia de seguridad, verifica el origen del archivo antes de continuar.
@@ -143,7 +143,7 @@ Descarga ejecutables únicamente de fuentes confiables. Si Windows muestra una a
 
 ## 🧭 Primeros pasos
 
-Después de instalar CraftPanel:
+Después de instalar Twinkle:
 
 1. **Abre la aplicación.** Sigue las instrucciones específicas de la versión Web o Desktop.
 2. **Comprueba la configuración inicial.** Revisa los directorios y las opciones disponibles.
@@ -187,7 +187,7 @@ No continúes si no estás seguro de qué operación se ejecutará.
 
 ## 🔐 Seguridad y privacidad
 
-La seguridad también depende de cómo se configure y distribuya la aplicación. Para utilizar y compartir CraftPanel responsablemente:
+La seguridad también depende de cómo se configure y distribuya la aplicación. Para utilizar y compartir Twinkle responsablemente:
 
 - No publiques contraseñas, tokens, cookies de sesión ni claves privadas.
 - No subas datos de usuarios reales ni bases de datos de tu instalación.
@@ -209,7 +209,7 @@ La seguridad también depende de cómo se configure y distribuya la aplicación.
 
 ## 🧰 Solución de problemas
 
-### CraftPanel Web no inicia
+### Twinkle Web no inicia
 
 - Comprueba que Node.js y npm estén instalados:
 
@@ -225,7 +225,7 @@ La seguridad también depende de cómo se configure y distribuya la aplicación.
 
 ### No puedo abrir la interfaz en el navegador
 
-- Verifica que CraftPanel siga en ejecución.
+- Verifica que Twinkle siga en ejecución.
 - Utiliza la dirección que indique la terminal.
 - Comprueba si el puerto está ocupado o si el firewall bloquea la conexión.
 - Recuerda que la aplicación puede estar configurada para aceptar únicamente conexiones locales.
@@ -239,19 +239,19 @@ La seguridad también depende de cómo se configure y distribuya la aplicación.
 
 ### Las rutas no funcionan en otro ordenador
 
-Configura rutas válidas para el equipo donde está instalado CraftPanel. No distribuyas configuraciones con rutas personales tomadas de tu propio ordenador.
+Configura rutas válidas para el equipo donde está instalado Twinkle. No distribuyas configuraciones con rutas personales tomadas de tu propio ordenador.
 
 ### Aparecen usuarios de otra instalación
 
 No distribuyas una instalación con cuentas ajenas. Utiliza un paquete limpio preparado para una instalación nueva. Antes de borrar datos, verifica cómo los utiliza la aplicación y conserva una copia de seguridad si necesitas mantenerlos.
 
-Si informas de un problema en GitHub, incluye la versión de CraftPanel, el sistema operativo, los pasos para reproducirlo y el mensaje de error. **Elimina antes cualquier contraseña, token o dato privado.**
+Si informas de un problema en GitHub, incluye la versión de Twinkle, el sistema operativo, los pasos para reproducirlo y el mensaje de error. **Elimina antes cualquier contraseña, token o dato privado.**
 
 ---
 
 ## 🗺️ Hoja de ruta
 
-CraftPanel puede seguir mejorando gracias a las pruebas y sugerencias de la comunidad. Estas son áreas posibles de mejora, no promesas de funciones ni fechas confirmadas:
+Twinkle puede seguir mejorando gracias a las pruebas y sugerencias de la comunidad. Estas son áreas posibles de mejora, no promesas de funciones ni fechas confirmadas:
 
 - [ ] Ampliar y actualizar las guías de instalación.
 - [ ] Facilitar la configuración inicial en instalaciones nuevas.
@@ -267,9 +267,9 @@ Las propuestas son bienvenidas. Puedes abrir una incidencia para plantear una me
 
 ---
 
-## 🤝 Participa en CraftPanel
+## 🤝 Participa en Twinkle
 
-**CraftPanel es un proyecto público y abierto a la colaboración.** Puedes utilizarlo, revisar su código, adaptarlo a tu flujo de trabajo y compartir mejoras bajo los términos de la licencia MIT.
+**Twinkle es un proyecto público y abierto a la colaboración.** Puedes utilizarlo, revisar su código, adaptarlo a tu flujo de trabajo y compartir mejoras bajo los términos de la licencia MIT.
 
 Puedes participar de varias maneras:
 
@@ -296,7 +296,7 @@ Al publicar incidencias, capturas o registros, no incluyas contraseñas, tokens,
 
 ## 📄 Licencia
 
-CraftPanel se distribuye bajo la **licencia MIT**. Esta licencia permite, entre otras cosas, utilizar, copiar, modificar, fusionar, publicar, distribuir, sublicenciar y vender copias del software, siempre sujeto a las condiciones de la licencia.
+Twinkle se distribuye bajo la **licencia MIT**. Esta licencia permite, entre otras cosas, utilizar, copiar, modificar, fusionar, publicar, distribuir, sublicenciar y vender copias del software, siempre sujeto a las condiciones de la licencia.
 
 En particular, debes conservar el aviso de copyright y el texto de permiso de la licencia en las copias o partes sustanciales del software. El software se proporciona **“tal cual”**, sin garantías, en los términos descritos en la licencia.
 
@@ -308,17 +308,17 @@ La licencia MIT del proyecto no reemplaza las licencias de bibliotecas, dependen
 
 ## ⚖️ Aviso sobre Minecraft
 
-CraftPanel es un proyecto independiente y **no está afiliado, respaldado ni aprobado oficialmente por Mojang Studios o Microsoft**. Minecraft y sus marcas pertenecen a sus respectivos titulares.
+Twinkle es un proyecto independiente y **no está afiliado, respaldado ni aprobado oficialmente por Mojang Studios o Microsoft**. Minecraft y sus marcas pertenecen a sus respectivos titulares.
 
-Quienes utilicen CraftPanel son responsables de respetar los términos y las licencias aplicables al juego, al software de servidor y a los recursos que instalen o distribuyan.
+Quienes utilicen Twinkle son responsables de respetar los términos y las licencias aplicables al juego, al software de servidor y a los recursos que instalen o distribuyan.
 
 ---
 
 ## 💚 Gracias
 
-Gracias por probar CraftPanel, compartir comentarios, informar de errores o contribuir con código y documentación. La participación de la comunidad ayuda a identificar problemas, proponer ideas y hacer que el proyecto sea más útil para todos.
+Gracias por probar Twinkle, compartir comentarios, informar de errores o contribuir con código y documentación. La participación de la comunidad ayuda a identificar problemas, proponer ideas y hacer que el proyecto sea más útil para todos.
 
 <p align="center">
-  <strong>CraftPanel</strong><br>
+  <strong>Twinkle</strong><br>
   <em>Tu servidor. Tu configuración. Tu control.</em>
 </p>
